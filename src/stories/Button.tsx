@@ -1,6 +1,6 @@
-import React from "react";
-import "./button.css";
 import clsx from "clsx";
+
+import "./button.css";
 
 interface ButtonProps {
   /**
