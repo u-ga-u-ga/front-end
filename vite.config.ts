@@ -5,7 +5,13 @@ import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), TanStackRouterVite()],
+  plugins: [
+    react(),
+    TanStackRouterVite({
+      routesDirectory: "src/pages",
+      generatedRouteTree: "src/app/routeTree.gen.ts",
+    }),
+  ],
   build: {
     rollupOptions: {
       output: {
