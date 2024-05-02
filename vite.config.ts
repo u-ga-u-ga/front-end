@@ -1,6 +1,7 @@
 import { TanStackRouterVite } from "@tanstack/router-vite-plugin";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
@@ -11,7 +12,13 @@ export default defineConfig({
       routesDirectory: "src/pages",
       generatedRouteTree: "src/app/routeTree.gen.ts",
     }),
-  ],
+    process.env.NODE_ENV !== "production" &&
+      visualizer({
+        filename: "./dist/report.html",
+        open: true,
+        brotliSize: true,
+      }),
+  ].filter(Boolean),
   build: {
     rollupOptions: {
       output: {
