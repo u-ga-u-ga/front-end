@@ -3,6 +3,7 @@ import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 
 import useAuth from "@/features/auth";
 import { Button } from "@/shared/ui/button";
+import { Checkbox } from "@/shared/ui/checkbox";
 import GoogleIcon from "@/shared/ui/Icon/google.svg?react";
 import HomeIcon from "@/shared/ui/Icon/home.svg?react";
 import KakaoIcon from "@/shared/ui/Icon/kakao.svg?react";
@@ -10,10 +11,12 @@ import NaverIcon from "@/shared/ui/Icon/naver.svg?react";
 
 export const Route = createFileRoute("/login")({
   component: LoginComponent,
-  validateSearch: (rawSearchParams: { redirect: string }) => {
-    return {
-      redirect: rawSearchParams.redirect || "",
-    };
+  validateSearch: ({ redirect }: { redirect?: string }) => {
+    if (redirect)
+      return {
+        redirect: redirect || "",
+      };
+    return {};
   },
 });
 
@@ -53,13 +56,13 @@ function LoginComponent() {
           className="rounded-[5px] border border-solid border-black/70 p-4 text-sm"
         />
         <div className="flex justify-center gap-32">
-          <label className="flex gap-2">
+          <label className="flex items-center gap-2">
             자동 로그인
-            <input type="checkbox" />
+            <Checkbox />
           </label>
-          <label className="flex gap-2">
+          <label className="flex items-center gap-2">
             아이디 저장
-            <input type="checkbox" />
+            <Checkbox />
           </label>
         </div>
         <Button>로그인</Button>
