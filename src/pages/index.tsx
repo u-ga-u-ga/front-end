@@ -10,7 +10,7 @@ function Home() {
   const auth = useAuth();
   return (
     <div className="p-2">
-      <h3>Welcome Home! {auth.user || "로그인하기"}</h3>
+      <h3>Welcome Home! {auth.user || "로그인 해주세요..."}</h3>
       <Link to="/mypage"> 마이페이지로...</Link>
       <Link to="/login"> 로그인.....</Link>
     </div>

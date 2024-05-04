@@ -1,10 +1,11 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createRouter, RouterProvider } from "@tanstack/react-router";
+import { createRouter } from "@tanstack/react-router";
 
-import useAuth, { AuthProvider } from "@/features/auth";
+import { AuthProvider } from "@/features/auth";
 
+import AppRouter from "./AppRouter";
 import { routeTree } from "./routeTree.gen";
 
 import "./index.css";
@@ -12,7 +13,7 @@ import "./index.css";
 const queryClient = new QueryClient();
 
 // Set up a Router instance
-const router = createRouter({
+export const router = createRouter({
   routeTree,
   context: {
     queryClient,
@@ -30,11 +31,6 @@ declare module "@tanstack/react-router" {
     router: typeof router;
   }
 }
-function InnerApp() {
-  const auth = useAuth();
-  return <RouterProvider router={router} context={{ auth }} />;
-}
-
 const rootElement = document.getElementById("root")!;
 
 if (!rootElement.innerHTML) {
@@ -43,9 +39,9 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <InnerApp />
+          <AppRouter />
         </AuthProvider>
       </QueryClientProvider>
-    </StrictMode>
+    </StrictMode>,
   );
 }

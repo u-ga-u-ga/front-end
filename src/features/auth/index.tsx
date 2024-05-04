@@ -21,7 +21,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = useCallback(
     (username: string) => setUser(key, username),
-    [setUser]
+    [setUser],
   );
 
   return (

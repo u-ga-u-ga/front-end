@@ -1,33 +1,15 @@
-import {
-  createFileRoute,
-  Link,
-  Outlet,
-  redirect,
-  useRouter,
-} from "@tanstack/react-router";
+import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 
 import useAuth from "@/features/auth";
 
-export const Route = createFileRoute("/_auth")({
-  beforeLoad: ({ context, location }) => {
-    if (!context.auth.isAuthenticated) {
-      console.log("접근금지~!!");
-      throw redirect({
-        to: "/login",
-        search: {
-          redirect: location.href,
-        },
-      });
-    }
-  },
-  component: AuthLayout,
+export const Route = createFileRoute("/_auth/_auth/mypage")({
+  component: MyPageComponent,
 });
 
-function AuthLayout() {
+function MyPageComponent() {
+  const auth = useAuth();
   const router = useRouter();
   const navigate = Route.useNavigate();
-  const auth = useAuth();
-
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to logout?")) {
       auth.logout();
@@ -36,12 +18,13 @@ function AuthLayout() {
       });
     }
   };
-
   return (
-    <div className="p-2 h-full">
+    <div>
+      <h1>{auth.user} 의 정보 페이지입니다</h1>
+
       <h1>Authenticated Route</h1>
       <p>This route's content is only visible to authenticated users.</p>
-      <ul className="py-2 flex gap-2">
+      <ul className="flex gap-2 py-2">
         <li>
           <button
             type="button"
@@ -52,9 +35,7 @@ function AuthLayout() {
           </button>
         </li>
       </ul>
-      <Link to="/">돌아가자..</Link>
-      <hr />
-      <Outlet />
+      <Link to="/">홈 화면</Link>
     </div>
   );
 }
