@@ -2,30 +2,51 @@ import { createContext, useCallback, useContext } from "react";
 
 import useLocalStorage from "@/shared/lib/useLocalStorage";
 
-export interface AuthContext {
+export type AuthSaveContext = {
+  isSave?: boolean;
+  autoLogin?: boolean;
+  user?: string | null;
+};
+export type AuthContext = {
   isAuthenticated: boolean;
   login: (username: string) => void;
   logout: () => void;
   user: string | null;
-}
+} & {
+  savedState: AuthSaveContext | null;
+  saveLoginInfo: (param: AuthSaveContext) => void;
+};
 
 const AuthContext = createContext<AuthContext | null>(null);
 
-const key = "auth.user";
+export const key = "auth.user";
+export const saveKey = "auth.user.save";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useLocalStorage<string>(key);
+  const [user, login, logout] = useLocalStorage<string>(key);
+  const [savedState, setSavedState] = useLocalStorage<AuthSaveContext>(saveKey);
   const isAuthenticated = !!user;
 
-  const logout = useCallback(() => setUser(key), [setUser]);
-
-  const login = useCallback(
-    (username: string) => setUser(key, username),
-    [setUser],
+  const saveLoginInfo = useCallback(
+    (param: AuthSaveContext) =>
+      setSavedState((props) => {
+        if (props) return { ...props, ...param };
+        return param;
+      }),
+    [setSavedState],
   );
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        user,
+        login,
+        logout,
+        savedState,
+        saveLoginInfo,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
