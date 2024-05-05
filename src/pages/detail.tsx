@@ -8,6 +8,7 @@ import {
   Share,
 } from "lucide-react";
 
+import copyTextToClipboard from "@/shared/lib/copyTextToClipboard";
 import { Button } from "@/shared/ui/button";
 import ImageSlider from "@/widgets/ImageSlider";
 
@@ -28,25 +29,7 @@ function DetailComponent() {
             <HomeIcon stroke="white" />
           </Link>
         </div>
-        <button
-          onClick={async () => {
-            if (navigator.clipboard) {
-              try {
-                await navigator.clipboard.writeText(window.location.href);
-                alert("copy success!!");
-              } catch {
-                alert("copy failed");
-              }
-            } else {
-              const _dummy = document.createElement("textarea");
-              _dummy.value = window.location.href;
-              document.body.appendChild(_dummy);
-              _dummy.select();
-              document.execCommand("copy");
-              document.body.removeChild(_dummy);
-            }
-          }}
-        >
+        <button onClick={() => copyTextToClipboard(window.location.href)}>
           <Share stroke="white" />
         </button>
       </nav>
