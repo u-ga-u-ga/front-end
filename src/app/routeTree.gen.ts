@@ -11,18 +11,13 @@
 // Import Routes
 
 import { Route as rootRoute } from './../pages/__root'
-import { Route as LoginImport } from './../pages/login'
 import { Route as DetailImport } from './../pages/detail'
 import { Route as IndexImport } from './../pages/index'
+import { Route as LoginIndexImport } from './../pages/login/index'
 import { Route as AuthAuthImport } from './../pages/_auth/_auth'
 import { Route as AuthAuthMypageImport } from './../pages/_auth/_auth.mypage'
 
 // Create/Update Routes
-
-const LoginRoute = LoginImport.update({
-  path: '/login',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const DetailRoute = DetailImport.update({
   path: '/detail',
@@ -31,6 +26,11 @@ const DetailRoute = DetailImport.update({
 
 const IndexRoute = IndexImport.update({
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LoginIndexRoute = LoginIndexImport.update({
+  path: '/login/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -56,12 +56,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DetailImport
       parentRoute: typeof rootRoute
     }
-    '/login': {
-      preLoaderRoute: typeof LoginImport
-      parentRoute: typeof rootRoute
-    }
     '/_auth/_auth': {
       preLoaderRoute: typeof AuthAuthImport
+      parentRoute: typeof rootRoute
+    }
+    '/login/': {
+      preLoaderRoute: typeof LoginIndexImport
       parentRoute: typeof rootRoute
     }
     '/_auth/_auth/mypage': {
@@ -76,8 +76,8 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
   DetailRoute,
-  LoginRoute,
   AuthAuthRoute.addChildren([AuthAuthMypageRoute]),
+  LoginIndexRoute,
 ])
 
 /* prettier-ignore-end */
