@@ -3,10 +3,10 @@ const plugin = require("tailwindcss/plugin");
 module.exports = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
   prefix: "",
   theme: {
@@ -14,12 +14,6 @@ module.exports = {
       center: true,
       padding: "2rem",
       screens: {
-        lg: "1024px",
-        // => @media (min-width: 1024px) { ... }
-
-        xl: "1280px",
-
-        // => @media (min-width: 1280px) { ... }
         "2xl": "1400px",
       },
     },
