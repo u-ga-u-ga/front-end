@@ -14,7 +14,7 @@ import HomeIcon from "@/shared/ui/Icon/home.svg?react";
 import KakaoIcon from "@/shared/ui/Icon/kakao.svg?react";
 import NaverIcon from "@/shared/ui/Icon/naver.svg?react";
 
-export const Route = createFileRoute("/login")({
+export const Route = createFileRoute("/login/")({
   component: LoginComponent,
   beforeLoad: ({ context, search }) => {
     const { savedState, login } = context.auth;
@@ -44,7 +44,6 @@ function LoginComponent() {
   const router = useRouter();
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
-  console.log(navigate);
   const onLogin: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     const { username, isSave, autoLogin } = Object.fromEntries(
