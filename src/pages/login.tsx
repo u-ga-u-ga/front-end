@@ -9,10 +9,10 @@ import {
 import useAuth from "@/features/auth";
 import { Button } from "@/shared/ui/button";
 import { Checkbox } from "@/shared/ui/checkbox";
-import GoogleIcon from "@/shared/ui/Icon/google.svg?react";
-import HomeIcon from "@/shared/ui/Icon/home.svg?react";
-import KakaoIcon from "@/shared/ui/Icon/kakao.svg?react";
-import NaverIcon from "@/shared/ui/Icon/naver.svg?react";
+import GoogleIcon from "@/shared/ui/icon/google.svg?react";
+import HomeIcon from "@/shared/ui/icon/home.svg?react";
+import KakaoIcon from "@/shared/ui/icon/kakao.svg?react";
+import NaverIcon from "@/shared/ui/icon/naver.svg?react";
 
 export const Route = createFileRoute("/login")({
   component: LoginComponent,
