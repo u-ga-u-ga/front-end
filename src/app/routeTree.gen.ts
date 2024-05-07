@@ -11,22 +11,26 @@
 // Import Routes
 
 import { Route as rootRoute } from './../pages/__root'
-import { Route as LoginImport } from './../pages/login'
+import { Route as ListImport } from './../pages/list'
 import { Route as DetailImport } from './../pages/detail'
+import { Route as AboutImport } from './../pages/about'
 import { Route as IndexImport } from './../pages/index'
 import { Route as RegisterItemIndexImport } from './../pages/RegisterItem/index'
-import { Route as AuthAuthImport } from './../pages/_auth/_auth'
-import { Route as AuthAuthMypageImport } from './../pages/_auth/_auth.mypage'
 
 // Create/Update Routes
 
-const AboutRoute = AboutImport.update({
-  path: '/about',
+const ListRoute = ListImport.update({
+  path: '/list',
   getParentRoute: () => rootRoute,
 } as any)
 
 const DetailRoute = DetailImport.update({
   path: '/detail',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AboutRoute = AboutImport.update({
+  path: '/about',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -40,16 +44,6 @@ const RegisterItemIndexRoute = RegisterItemIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const AuthAuthRoute = AuthAuthImport.update({
-  id: '/_auth/_auth',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AuthAuthMypageRoute = AuthAuthMypageImport.update({
-  path: '/mypage',
-  getParentRoute: () => AuthAuthRoute,
-} as any)
-
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -58,25 +52,21 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/about': {
+      preLoaderRoute: typeof AboutImport
+      parentRoute: typeof rootRoute
+    }
     '/detail': {
       preLoaderRoute: typeof DetailImport
       parentRoute: typeof rootRoute
     }
-    '/login': {
-      preLoaderRoute: typeof LoginImport
-      parentRoute: typeof rootRoute
-    }
-    '/_auth/_auth': {
-      preLoaderRoute: typeof AuthAuthImport
+    '/list': {
+      preLoaderRoute: typeof ListImport
       parentRoute: typeof rootRoute
     }
     '/RegisterItem/': {
       preLoaderRoute: typeof RegisterItemIndexImport
       parentRoute: typeof rootRoute
-    }
-    '/_auth/_auth/mypage': {
-      preLoaderRoute: typeof AuthAuthMypageImport
-      parentRoute: typeof AuthAuthImport
     }
   }
 }
@@ -85,9 +75,9 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
+  AboutRoute,
   DetailRoute,
-  LoginRoute,
-  AuthAuthRoute.addChildren([AuthAuthMypageRoute]),
+  ListRoute,
   RegisterItemIndexRoute,
 ])
 
