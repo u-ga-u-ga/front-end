@@ -1,11 +1,12 @@
+const plugin = require("tailwindcss/plugin");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
   prefix: "",
   theme: {
@@ -13,12 +14,6 @@ module.exports = {
       center: true,
       padding: "2rem",
       screens: {
-        lg: "1024px",
-        // => @media (min-width: 1024px) { ... }
-
-        xl: "1280px",
-
-        // => @media (min-width: 1280px) { ... }
         "2xl": "1400px",
       },
     },
@@ -79,5 +74,39 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    plugin(function ({ addUtilities }) {
+      // ★★
+      addUtilities(
+        {
+          ".scrollbar-hide": {
+            /* IE and Edge */
+            "-ms-overflow-style": "none",
+
+            /* Firefox */
+            "scrollbar-width": "none",
+
+            /* Safari and Chrome */
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
+          },
+          ".scrollbar-default": {
+            /* IE and Edge */
+            "-ms-overflow-style": "auto",
+
+            /* Firefox */
+            "scrollbar-width": "auto",
+
+            /* Safari and Chrome */
+            "&::-webkit-scrollbar": {
+              display: "block",
+            },
+          },
+        },
+        ["responsive"],
+      );
+    }),
+  ],
 };

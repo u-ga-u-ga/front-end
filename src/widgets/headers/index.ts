@@ -1,0 +1,1 @@
+export { RegisterItemPageHeader } from "./registerItemPageHeader";
