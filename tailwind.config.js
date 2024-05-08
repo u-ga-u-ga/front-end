@@ -14,6 +14,12 @@ module.exports = {
       center: true,
       padding: "2rem",
       screens: {
+        lg: "1024px",
+        // => @media (min-width: 1024px) { ... }
+
+        xl: "1280px",
+
+        // => @media (min-width: 1280px) { ... }
         "2xl": "1400px",
       },
     },
