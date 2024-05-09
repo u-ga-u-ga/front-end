@@ -1,6 +1,6 @@
 export { Badge } from "./badge";
 export { Button, buttonVariants } from "./button";
-export { CrossIcon } from "./icon";
+export { default as CrossIcon } from "./icon/cross.svg?react";
 export { ImageUploadButton } from "./image";
 export {
   Input,
