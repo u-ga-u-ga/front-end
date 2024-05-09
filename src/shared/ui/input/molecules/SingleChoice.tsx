@@ -19,7 +19,7 @@ export function SingleChoice({
   return (
     <div className="flex flex-col">
       {title ? (
-        <div className="font-sans text-[1.0625rem] font-bold leading-[132%] text-black">
+        <div className="font-sans text-[1.0625rem] font-bold leading-[132%]  text-black">
           {title}
         </div>
       ) : null}
