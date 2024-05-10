@@ -10,18 +10,6 @@ export const content = [
 ];
 export const prefix = "";
 export const theme = {
-  fontSize: {
-    sm: ["13px", "130%"],
-    base: ["16px", "140%"],
-    lg: ["18px", "28px"],
-    xl: ["20px", "132%"],
-    "2xl": ["24px", "132%"], // not yet used in the design
-    "3xl": ["28px", "132%"], // not yet used in the design
-    "4xl": ["35px", "132%"],
-  },
-  fontFamily: {
-    sans: ["Inter", "sans-serif"],
-  },
   container: {
     center: true,
     padding: "2rem",
@@ -33,6 +21,18 @@ export const theme = {
       // => @media (min-width: 1280px) { ... }
       "2xl": "1400px",
     },
+  },
+  fontSize: {
+    sm: ["13px", "130%"],
+    base: ["16px", "140%"],
+    lg: ["18px", "28px"],
+    xl: ["20px", "132%"],
+    "2xl": ["24px", "132%"], // not yet used in the design
+    "3xl": ["28px", "132%"], // not yet used in the design
+    "4xl": ["35px", "132%"],
+  },
+  fontFamily: {
+    sans: ["Inter", "sans-serif"],
   },
   extend: {
     colors: {
@@ -133,7 +133,7 @@ export const plugins = [
     );
     addComponents({
       ".font-header-1": {
-        // fontFamily: theme("fontFamily.sans"),
+        fontFamily: theme("fontFamily.sans"),
         fontSize: theme("fontSize.4xl[0]"),
         lineHeight: theme("fontSize.4xl[1]"),
         fontWeight: theme("fontWeight.bold"),
@@ -146,26 +146,26 @@ export const plugins = [
       },
       ".font-body-1": {
         fontFamily: theme("fontFamily.sans"),
-        fontSize: theme("fontSize.xl"),
-        lineHeight: theme("fontSize.xl"),
+        fontSize: theme("fontSize.xl[0]"),
+        lineHeight: theme("fontSize.xl[1]"),
         fontWeight: theme("fontWeight.bold"),
       },
       ".font-body-2": {
         fontFamily: theme("fontFamily.sans"),
-        fontSize: theme("fontSize.base"),
-        lineHeight: theme("fontSize.base"),
+        fontSize: theme("fontSize.base[0]"),
+        lineHeight: theme("fontSize.base[1]"),
         fontWeight: theme("fontWeight.normal"),
       },
       ".font-body-3": {
         fontFamily: theme("fontFamily.sans"),
-        fontSize: theme("fontSize.base"),
-        lineHeight: theme("fontSize.base"),
+        fontSize: theme("fontSize.base[0]"),
+        lineHeight: theme("fontSize.base[1]"),
         fontWeight: theme("fontWeight.normal"),
       },
       ".font-body-4": {
         fontFamily: theme("fontFamily.sans"),
-        fontSize: theme("fontSize.sm"),
-        lineHeight: theme("fontSize.sm"),
+        fontSize: theme("fontSize.sm[0]"),
+        lineHeight: theme("fontSize.sm[1]"),
         fontWeight: theme("fontWeight.normal"),
       },
     });
