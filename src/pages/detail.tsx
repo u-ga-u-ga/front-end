@@ -1,15 +1,8 @@
-import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
-import {
-  ChevronLeft,
-  ChevronRight,
-  CircleUserRound,
-  Heart,
-  HomeIcon,
-  Share,
-} from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
+import { ChevronRight, CircleUserRound, Heart } from "lucide-react";
 
-import copyTextToClipboard from "@/shared/lib/copyTextToClipboard";
 import { Button } from "@/shared/ui/button";
+import DetailPageHeader from "@/widgets/headers/detailPageHeader";
 import ImageSlider from "@/widgets/ImageSlider";
 
 export const Route = createFileRoute("/detail")({
@@ -17,26 +10,13 @@ export const Route = createFileRoute("/detail")({
 });
 
 function DetailComponent() {
-  const router = useRouter();
   return (
-    <div className="relative h-full w-full">
-      <nav className="absolute top-0 z-10 flex w-full justify-between p-4">
-        <div className="flex gap-4">
-          <button onClick={router.history.back}>
-            <ChevronLeft stroke="white" />
-          </button>
-          <Link to="/">
-            <HomeIcon stroke="white" />
-          </Link>
-        </div>
-        <button onClick={() => copyTextToClipboard(window.location.href)}>
-          <Share stroke="white" />
-        </button>
-      </nav>
-      <main className="h-full w-full overflow-scroll scrollbar-hide">
+    <div className="relative h-full w-full overflow-scroll scrollbar-hide">
+      <DetailPageHeader />
+      <main className="absolute top-0 h-full w-full">
         <ImageSlider
           srcList={Array(10).fill(
-            "https://cdn.pixabay.com/photo/2023/08/02/18/21/yoga-8165759_1280.jpg",
+            "https://cdn.pixabay.com/photo/2023/08/02/18/21/yoga-8165759_1280.jpg"
           )}
         />
         <div className="min-h-[calc(100%-400px) mb-16 [&>div]:p-4">
@@ -77,7 +57,7 @@ function DetailComponent() {
           <div className="h-[2000px]"></div>
         </div>
       </main>
-      <footer className="absolute bottom-0 flex h-16 w-full items-center justify-between gap-3 border-t border-solid border-slate-300 bg-white p-2">
+      <footer className="fixed bottom-0 flex h-16 w-[600px] items-center justify-between gap-3 border-t border-solid border-slate-300 bg-white p-2">
         <Heart
           className="text-slate-500"
           onClick={(e) => {
