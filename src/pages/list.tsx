@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import profile from "../shared/ui/svg/Profile.svg";
-import bell from "../shared/ui/svg/Bell.svg";
-import list from "../shared/ui/svg/List.svg";
-import arrow from "../shared/ui/svg/Arrow.svg";
-import chat from "../shared/ui/svg/Chat.svg";
-import like from "../shared/ui/svg/Like.svg";
-import plus from "../shared/ui/svg/Plus.svg";
+
+import ProfileIcon from "@/shared/ui/icon/profile.svg?react";
+import BellIcon from "@/shared/ui/icon/bell.svg?react";
+import ListIcon from "@/shared/ui/icon/list.svg?react";
+import ArrowIcon from "@/shared/ui/icon/arrow.svg?react";
+import ChatIcon from "@/shared/ui/icon/chat.svg?react";
+import LikeIcon from "@/shared/ui/icon/like.svg?react";
+import PlusIcon from "@/shared/ui/icon/plus.svg?react";
 
 export const Route = createFileRoute("/list")({
   component: ListComponent,
@@ -23,9 +24,9 @@ function ListComponent() {
             가구고고
           </div>
           <div className="icon flex h-[40px] w-[143px] space-x-7">
-            <img alt="profile" src={profile} />
-            <img alt="bell" src={bell} />
-            <img alt="list" src={list} />
+            <ProfileIcon />
+            <BellIcon />
+            <ListIcon />
           </div>
         </div>
         <div
@@ -35,7 +36,7 @@ function ListComponent() {
           <div className="top_location relative h-[52px]  self-stretch ">
             <div className="relative  top-[12px] inline-flex items-center gap-[6px] ">
               <div className="font-18">군자동</div>
-              <img alt="Expand arrow" src={arrow} />
+              <ArrowIcon />
             </div>
           </div>
 
@@ -68,20 +69,14 @@ function ListComponent() {
                 </div>
                 <div className="relative flex w-full flex-[0_0_auto] items-center justify-end gap-[4px] self-stretch">
                   <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <img
-                      className="relative h-[16px] w-[16px]"
-                      alt="Bx chat"
-                      src={chat}
+                    <ChatIcon
                     />
                     <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
                       3
                     </div>
                   </div>
                   <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <img
-                      className="relative h-[16px] w-[16px]"
-                      alt="Ant design heart"
-                      src={like}
+                    <LikeIcon
                     />
                     <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
                       2
@@ -118,10 +113,7 @@ function ListComponent() {
                 </div>
                 <div className="relative flex w-full flex-[0_0_auto] items-center justify-end gap-[4px] self-stretch">
                   <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <img
-                      className="relative h-[16px] w-[16px]"
-                      alt="Ant design heart"
-                      src={like}
+                    <LikeIcon
                     />
                     <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
                       2
@@ -321,10 +313,7 @@ function ListComponent() {
         </div>
 
         <div className="absolute left-[569px] top-[903px] flex h-[50px] w-[50px] items-start gap-[10px] rounded-[100px] bg-[#99ccff] p-[12px] shadow-[0px_4px_12px_#0000001f]">
-          <img
-            className="relative mb-[-1.00px] mr-[-1.00px] h-[27px] w-[27px]"
-            alt="Plus math"
-            src={plus}
+          <PlusIcon
           />
         </div>
       </div>
