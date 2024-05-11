@@ -5,16 +5,25 @@ import {
   CircleUserRound,
   FileSpreadsheet,
   Heart,
-  HomeIcon,
   ShoppingBag,
   WalletCards,
 } from "lucide-react";
 
 import useAuth from "@/features/auth";
+import HomeIcon from "@/shared/ui/icon/home.svg?react";
+import { LinkContainerProps } from "@/shared/ui/linkContainer";
+import LinkContainerList from "@/shared/ui/linkContainer/list";
 
 export const Route = createFileRoute("/_auth/_auth/mypage")({
   component: MyPageComponent,
 });
+
+const footerLinkList = [
+  { text: "채팅 관리" },
+  { text: "내 정보 변경" },
+  { text: "고객센터" },
+  { text: "회원 탈퇴" },
+] satisfies LinkContainerProps[];
 
 function MyPageComponent() {
   const auth = useAuth();
@@ -31,7 +40,7 @@ function MyPageComponent() {
   return (
     <div className="relative h-full w-full">
       <nav className="top-0 z-10 flex w-full justify-between p-4">
-        <span>마이페이지</span>
+        <span className="font-header-1">마이페이지</span>
         <div className="flex gap-4">
           <Link to="/">
             <HomeIcon stroke="black" />
@@ -87,24 +96,7 @@ function MyPageComponent() {
           </div>
           <div className="mt-4 h-24 rounded-sm bg-slate-300"></div>
         </div>
-        <ul className="flex flex-col gap-2 py-4">
-          <li className="flex justify-between border-b py-4">
-            <h2>채팅 관리</h2>
-            <ChevronRight width={16} height={16} stroke="gray" />
-          </li>
-          <li className="flex justify-between border-b py-4">
-            <h2>내 정보 변경</h2>
-            <ChevronRight width={16} height={16} stroke="gray" />
-          </li>
-          <li className="flex justify-between border-b py-4">
-            <h2>고객센터</h2>
-            <ChevronRight width={16} height={16} stroke="gray" />
-          </li>
-          <li className="flex justify-between py-4">
-            <h2>회원 탈퇴</h2>
-            <ChevronRight width={16} height={16} stroke="gray" />
-          </li>
-        </ul>
+        <LinkContainerList list={footerLinkList} />
       </main>
     </div>
   );
