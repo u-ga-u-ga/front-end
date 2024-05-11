@@ -2,7 +2,6 @@ import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import {
   Bell,
   ChevronRight,
-  CircleUserRound,
   FileSpreadsheet,
   Heart,
   ShoppingBag,
@@ -10,6 +9,7 @@ import {
 } from "lucide-react";
 
 import useAuth from "@/features/auth";
+import DefaultUserProfile from "@/shared/ui/icon/defaultProfile.svg?react";
 import HomeIcon from "@/shared/ui/icon/home.svg?react";
 import { LinkContainerProps } from "@/shared/ui/linkContainer";
 import LinkContainerList from "@/shared/ui/linkContainer/list";
@@ -17,6 +17,13 @@ import LinkContainerList from "@/shared/ui/linkContainer/list";
 export const Route = createFileRoute("/_auth/_auth/mypage")({
   component: MyPageComponent,
 });
+
+const headerLinkList = [
+  { text: "관심목록", icon: <Heart fill="var(--primary)" /> },
+  { text: "판매내역", icon: <FileSpreadsheet /> },
+  { text: "구매내역", icon: <ShoppingBag /> },
+  { text: "가계부", icon: <WalletCards /> },
+] satisfies LinkContainerProps[];
 
 const footerLinkList = [
   { text: "채팅 관리" },
@@ -50,11 +57,11 @@ function MyPageComponent() {
       </nav>
       <main className="w-full overflow-scroll p-4 scrollbar-hide">
         <div className="flex items-center justify-between py-2">
-          <div className="flex items-center gap-2">
-            <CircleUserRound height={30} width={30} />
-            <div className="flex flex-col text-sm">
-              <span className="font-bold">{auth.user}</span>
-              <span className="text-xs text-slate-400">
+          <div className="flex items-center gap-4 text-gray-200">
+            <DefaultUserProfile height={64} width={64} />
+            <div className="flex flex-col text-sm text-black">
+              <span className="font-body-3 font-bold">{auth.user}</span>
+              <span className="font-body-4 text-gray-500">
                 중랑구 면목동 #1234abcd
               </span>
             </div>
@@ -63,32 +70,7 @@ function MyPageComponent() {
             <ChevronRight stroke="gray" />
           </button>
         </div>
-        <div className="flex w-full flex-1 justify-between p-4">
-          <div className="flex flex-col items-center gap-1">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground">
-              <Heart fill="var(--primary)" />
-            </div>
-            <span className="text-sm">관심목록</span>
-          </div>
-          <div className="flex flex-col items-center gap-1">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground">
-              <FileSpreadsheet />
-            </div>
-            <span className="text-sm">판매내역</span>
-          </div>
-          <div className="flex flex-col items-center gap-1">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground">
-              <ShoppingBag />
-            </div>
-            <span className="text-sm">구매내역</span>
-          </div>
-          <div className="flex flex-col items-center gap-1">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground">
-              <WalletCards />
-            </div>
-            <span className="text-sm">가계부</span>
-          </div>
-        </div>
+        <LinkContainerList variant="secondary" list={headerLinkList} />
         <div>
           <div className="flex justify-between">
             <h2>최근 본 상품</h2>
