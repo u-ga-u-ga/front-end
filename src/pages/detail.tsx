@@ -1,10 +1,12 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { ChevronRight, CircleUserRound, Heart } from "lucide-react";
 
 import { detailQueryOptions } from "@/entities/detail/api/detailQueryOptions";
 import useMouseSnapSlide from "@/shared/lib/useMouseSnapSlide";
 import { Button } from "@/shared/ui/button";
+import ChevronRight from "@/shared/ui/icon/chevronLeft.svg?react";
+import DefaultProfile from "@/shared/ui/icon/defaultProfile.svg?react";
+import Heart from "@/shared/ui/icon/heart.svg?react";
 import ItemInfo from "@/shared/ui/itemInfo";
 import DetailPageHeader from "@/widgets/headers/detailPageHeader";
 import ImageSlider from "@/widgets/ImageSlider";
@@ -36,7 +38,7 @@ function DetailComponent() {
         />
         <div className="min-h-[calc(100%-400px) mb-16 [&>div]:p-4">
           <div className="flex items-center justify-start gap-2 ">
-            <CircleUserRound height={30} width={30} />
+            <DefaultProfile height={30} width={30} className="text-gray-200" />
             <div className="flex flex-col text-sm">
               <span className="font-bold">{data.userName}</span>
               <span>{data.addr}</span>
@@ -53,9 +55,9 @@ function DetailComponent() {
           </div>
           <hr />
           <div>
-            <div className="flex justify-between">
+            <div className="flex items-center justify-between">
               <h2>거래 희망 장소</h2>
-              <ChevronRight />
+              <ChevronRight transform="rotate(180)" width={16} height={16} />
             </div>
             <div className="mt-4 h-24 rounded-sm bg-slate-300"></div>
           </div>
@@ -65,7 +67,7 @@ function DetailComponent() {
               <h2 className="font-body2-font-family text-body2-font-size leading-body2-line-height font-body2-font-weight relative flex-1 text-left">
                 {data.category}를 찾으시나요?
               </h2>
-              <ChevronRight />
+              <ChevronRight transform="rotate(180)" width={16} height={16} />
             </div>
             <div
               className="relative flex shrink-0 flex-row items-start justify-start gap-4 self-stretch overflow-auto pb-2 pt-2 scrollbar-hide"
@@ -83,13 +85,13 @@ function DetailComponent() {
       </main>
       <footer className="fixed bottom-0 flex h-16 w-[600px] items-center justify-between gap-3 border-t border-solid border-slate-300 bg-white p-2">
         <Heart
-          className="text-slate-500"
+          className="stroke-gray-500 text-transparent"
           onClick={(e) => {
             const { currentTarget } = e;
-            if (currentTarget.style.fill) {
-              currentTarget.style.removeProperty("fill");
+            if (currentTarget.style.color) {
+              currentTarget.style.removeProperty("color");
             } else {
-              currentTarget.style.fill = "red";
+              currentTarget.style.color = "red";
             }
           }}
         />

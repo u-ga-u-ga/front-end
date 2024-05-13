@@ -1,17 +1,14 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
-import {
-  ChevronRight,
-  FileSpreadsheet,
-  Heart,
-  ShoppingBag,
-  WalletCards,
-} from "lucide-react";
 
 import useAuth from "@/features/auth";
 import useMouseSnapSlide from "@/shared/lib/useMouseSnapSlide";
+import ShoppingBag from "@/shared/ui/icon/bag.svg?react";
 import BellIcon from "@/shared/ui/icon/bellOutline.svg?react";
+import ChevronRight from "@/shared/ui/icon/chevronLeft.svg?react";
 import DefaultUserProfile from "@/shared/ui/icon/defaultProfile.svg?react";
+import Heart from "@/shared/ui/icon/heart.svg?react";
 import HomeIcon from "@/shared/ui/icon/home.svg?react";
+import ReceiptIcon from "@/shared/ui/icon/receipt.svg?react";
 import ItemInfo from "@/shared/ui/itemInfo";
 import { LinkContainerProps } from "@/shared/ui/linkContainer";
 import LinkContainerList from "@/shared/ui/linkContainer/list";
@@ -21,10 +18,9 @@ export const Route = createFileRoute("/_auth/_auth/mypage")({
 });
 
 const headerLinkList = [
-  { text: "관심목록", icon: <Heart className="fill-primary-dark" /> },
-  { text: "판매내역", icon: <FileSpreadsheet /> },
+  { text: "관심목록", icon: <Heart /> },
+  { text: "판매내역", icon: <ReceiptIcon /> },
   { text: "구매내역", icon: <ShoppingBag /> },
-  { text: "가계부", icon: <WalletCards /> },
 ] satisfies LinkContainerProps[];
 
 const footerLinkList = [
@@ -63,7 +59,7 @@ function MyPageComponent() {
             <HomeIcon width={30} height={30} />
           </Link>
           <div className="flex items-center justify-center">
-            <BellIcon width={28} height={28} />
+            <BellIcon width={40} height={40} />
           </div>
         </div>
       </nav>
@@ -83,14 +79,24 @@ function MyPageComponent() {
             </div>
           </div>
           <button onClick={handleLogout}>
-            <ChevronRight stroke="gray" />
+            <ChevronRight
+              transform="rotate(180)"
+              width={16}
+              height={16}
+              className="text-gray-500"
+            />
           </button>
         </div>
         <LinkContainerList variant="secondary" list={headerLinkList} />
         <div>
           <div className="flex justify-between">
             <h2>최근 본 상품</h2>
-            <ChevronRight stroke="gray" />
+            <ChevronRight
+              transform="rotate(180)"
+              width={16}
+              height={16}
+              className="text-gray-500"
+            />
           </div>
 
           <div
