@@ -1,5 +1,7 @@
 import { queryOptions } from "@tanstack/react-query";
 
+import { DetailDto } from "./types";
+
 const _mockData = {
   userName: "유저 닉네임",
   addr: "중랑구 면목동",
@@ -9,6 +11,7 @@ const _mockData = {
   content: "8/31일 해외 직구 한\n한달도 안된 제품 입니다.\n박풀 S급입니다.",
   price: 360_000,
   canBeDeal: false,
-};
+} satisfies DetailDto;
+
 export const detailQueryOptions = () =>
   queryOptions({ queryKey: ["detail"], queryFn: () => _mockData });
