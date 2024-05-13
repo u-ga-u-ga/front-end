@@ -21,14 +21,14 @@ export default function ItemInfo({
         />
       </div>
       <div className="relative flex shrink-0 flex-col items-center justify-start gap-1 self-stretch pl-2 pr-2">
-        <div className="font-body4-font-family text-body4-font-size leading-body4-line-height font-body4-font-weight relative self-stretch text-left">
+        <div className="font-body-4 relative self-stretch text-left">
           {itemName}
         </div>
         <div className="relative flex shrink-0 flex-row items-center justify-between self-stretch">
-          <div className="font-body2-font-family text-body2-font-size leading-body2-line-height font-body2-font-weight relative text-left">
-            {price}
+          <div className="font-body-2 relative text-left">
+            {price.toLocaleString()}
           </div>
-          <div className="font-body4-font-family text-body4-font-size leading-body4-line-height font-body4-font-weight relative text-left text-gray-500">
+          <div className="font-body-4 relative text-left text-gray-500">
             {date}
           </div>
         </div>

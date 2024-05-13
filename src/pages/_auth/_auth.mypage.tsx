@@ -1,6 +1,5 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import {
-  Bell,
   ChevronRight,
   FileSpreadsheet,
   Heart,
@@ -9,8 +8,11 @@ import {
 } from "lucide-react";
 
 import useAuth from "@/features/auth";
+import useMouseSnapSlide from "@/shared/lib/useMouseSnapSlide";
+import BellIcon from "@/shared/ui/icon/bellOutline.svg?react";
 import DefaultUserProfile from "@/shared/ui/icon/defaultProfile.svg?react";
 import HomeIcon from "@/shared/ui/icon/home.svg?react";
+import ItemInfo from "@/shared/ui/itemInfo";
 import { LinkContainerProps } from "@/shared/ui/linkContainer";
 import LinkContainerList from "@/shared/ui/linkContainer/list";
 
@@ -19,7 +21,7 @@ export const Route = createFileRoute("/_auth/_auth/mypage")({
 });
 
 const headerLinkList = [
-  { text: "관심목록", icon: <Heart fill="var(--primary)" /> },
+  { text: "관심목록", icon: <Heart className="fill-primary-dark" /> },
   { text: "판매내역", icon: <FileSpreadsheet /> },
   { text: "구매내역", icon: <ShoppingBag /> },
   { text: "가계부", icon: <WalletCards /> },
@@ -32,7 +34,15 @@ const footerLinkList = [
   { text: "회원 탈퇴" },
 ] satisfies LinkContainerProps[];
 
+const _tempSameCategoryImages_WILL_BE_REMOVED_AFTER_API_READY = Array(6).fill({
+  src: "https://cdn.pixabay.com/photo/2023/08/02/18/21/yoga-8165759_1280.jpg",
+  itemName: "아크릴체어",
+  price: 30000,
+  date: "3일 전",
+});
+
 function MyPageComponent() {
+  const { callbacks } = useMouseSnapSlide({ speed: 1 });
   const auth = useAuth();
   const router = useRouter();
   const navigate = Route.useNavigate();
@@ -46,19 +56,25 @@ function MyPageComponent() {
   };
   return (
     <div className="relative h-full w-full">
-      <nav className="top-0 z-10 flex w-full justify-between p-4">
+      <nav className="top-0 z-10 flex w-full items-center justify-between p-10">
         <span className="font-header-1">마이페이지</span>
-        <div className="flex gap-4">
+        <div className="flex shrink-0 items-center gap-4">
           <Link to="/">
-            <HomeIcon stroke="black" />
+            <HomeIcon width={30} height={30} />
           </Link>
-          <Bell stroke="black" />
+          <div className="flex items-center justify-center">
+            <BellIcon width={28} height={28} />
+          </div>
         </div>
       </nav>
-      <main className="w-full overflow-scroll p-4 scrollbar-hide">
-        <div className="flex items-center justify-between py-2">
-          <div className="flex items-center gap-4 text-gray-200">
-            <DefaultUserProfile height={64} width={64} />
+      <main className="flex w-full flex-col gap-10 overflow-scroll p-8 scrollbar-hide">
+        <div className="flex items-center justify-between gap-10">
+          <div className="relative flex shrink-0 flex-row items-center justify-start gap-4 self-stretch ">
+            <DefaultUserProfile
+              height={64}
+              width={64}
+              className="text-gray-200"
+            />
             <div className="flex flex-col text-sm text-black">
               <span className="font-body-3 font-bold">{auth.user}</span>
               <span className="font-body-4 text-gray-500">
@@ -76,7 +92,17 @@ function MyPageComponent() {
             <h2>최근 본 상품</h2>
             <ChevronRight stroke="gray" />
           </div>
-          <div className="mt-4 h-24 rounded-sm bg-slate-300"></div>
+
+          <div
+            className="relative flex shrink-0 flex-row items-start justify-start gap-4 self-stretch overflow-auto pb-2 pt-2 scrollbar-hide"
+            {...callbacks}
+          >
+            {_tempSameCategoryImages_WILL_BE_REMOVED_AFTER_API_READY.map(
+              (_itemInfo, idx) => (
+                <ItemInfo key={idx} {..._itemInfo} />
+              )
+            )}
+          </div>
         </div>
         <LinkContainerList list={footerLinkList} />
       </main>

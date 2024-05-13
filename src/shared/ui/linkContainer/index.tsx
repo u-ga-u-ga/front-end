@@ -16,7 +16,7 @@ const containerVariants = cva("flex", {
   variants: {
     variant: {
       primary: "flex justify-between border-b py-4",
-      secondary: "flex flex-col items-center gap-1",
+      secondary: "flex flex-col items-center gap-1 text-primary-dark gap-2.5",
     },
   },
   defaultVariants: {
@@ -43,10 +43,10 @@ export default function LinkContainer({
       )}
       {variant === "secondary" && (
         <>
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100">
-            {icon ?? <Heart fill="var(--primary)" />}
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
+            {icon ?? <Heart />}
           </div>
-          <span className="text-sm">{text}</span>
+          <span className="text-sm text-black">{text}</span>
         </>
       )}
     </Tag>
