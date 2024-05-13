@@ -26,7 +26,7 @@ export default function ItemInfo({
         </div>
         <div className="relative flex shrink-0 flex-row items-center justify-between self-stretch">
           <div className="font-body-2 relative text-left">
-            {price.toLocaleString()}
+            {price.toLocaleString()}원
           </div>
           <div className="font-body-4 relative text-left text-gray-500">
             {date}
