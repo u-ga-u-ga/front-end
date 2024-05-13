@@ -34,6 +34,10 @@ export const theme = {
   fontFamily: {
     sans: ["Inter", "sans-serif"],
   },
+  fontWeight: {
+    normal: "400",
+    bold: "700",
+  },
   extend: {
     colors: {
       primary: {
@@ -154,7 +158,7 @@ export const plugins = [
         fontFamily: theme("fontFamily.sans"),
         fontSize: theme("fontSize.base[0]"),
         lineHeight: theme("fontSize.base[1]"),
-        fontWeight: theme("fontWeight.normal"),
+        fontWeight: theme("fontWeight.bold"),
       },
       ".font-body-3": {
         fontFamily: theme("fontFamily.sans"),
