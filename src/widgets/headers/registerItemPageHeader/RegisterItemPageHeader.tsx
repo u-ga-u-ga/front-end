@@ -16,12 +16,12 @@ export function RegisterItemPageHeader({
         <CrossIcon />
       </div>
 
-      <div className="absolute left-1/2 top-1/2 box-content flex  translate-x-[-50%] translate-y-[-50%] items-center justify-center gap-2.5 overflow-visible text-center font-['Inter'] text-[2.1875rem] font-bold leading-[132%] text-black">
+      <div className="font-header-1 absolute left-1/2 top-1/2 box-content flex  translate-x-[-50%] translate-y-[-50%] items-center justify-center gap-2.5 overflow-visible text-center font-sans text-black">
         <span>내 가구 팔기</span>
       </div>
 
       <div
-        className="text-1  flex h-10  items-center justify-end gap-2.5 font-['Inter'] text-xl leading-[132%] text-[#8c8c8c]"
+        className="font-header-2  flex h-10  items-center justify-end gap-2.5  font-sans text-gray-500"
         onClick={onClickRightButton}
       >
         임시저장

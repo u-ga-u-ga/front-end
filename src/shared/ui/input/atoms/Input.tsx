@@ -11,15 +11,15 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <input
         type={type}
         className={cn(
-          "placeholder flex h-16 items-center gap-2.5 self-stretch rounded border border-gray-200 p-4 font-sans leading-[140%] text-gray-950",
-          className,
+          "placeholder font-body-3 flex h-16 items-center gap-2.5 self-stretch rounded border border-gray-200 p-4 font-sans  text-black",
+          className
         )}
         ref={ref}
         value={value}
         {...props}
       />
     );
-  },
+  }
 );
 Input.displayName = "Input";
 

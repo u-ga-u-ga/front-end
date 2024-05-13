@@ -19,9 +19,7 @@ export function SingleChoice({
   return (
     <div className="flex flex-col">
       {title ? (
-        <div className="font-sans text-[1.0625rem] font-bold leading-[132%]  text-black">
-          {title}
-        </div>
+        <label className="font-body-2 font-sans text-black">{title}</label>
       ) : null}
       <div className="mt-2 flex gap-2">
         {choices.map((choice) => (
