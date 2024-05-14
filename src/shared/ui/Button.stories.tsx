@@ -17,14 +17,33 @@ const meta = {
       control: "select",
       options: [
         "default",
-        "destructive",
         "outline",
+        "destructive",
         "secondary",
         "ghost",
         "link",
       ],
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            width: "50vh",
+            height: "30vw",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: "0 0 10px 0px rgba(0, 0, 0, 0.5)",
+          }}
+        >
+          <Story />
+        </div>
+      );
+    },
+  ],
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -34,6 +53,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     variant: "default",
+    size: "default",
     children: "Button",
   },
 };
