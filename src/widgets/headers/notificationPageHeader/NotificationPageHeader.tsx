@@ -1,7 +1,7 @@
-import { CrossIcon } from "@/shared/ui";
 import { Type3Header } from "@/shared/ui/headerProptotype/Type3Header";
+import ChevronLeft from "@/shared/ui/icon/chevronLeft.svg?react";
 
-export function RegisterItemPageHeader({
+export function NotificationPageHeader({
   onClickLeftButton,
   onClickRightButton,
 }: {
@@ -10,11 +10,11 @@ export function RegisterItemPageHeader({
 }) {
   return (
     <Type3Header
-      leftButton={<CrossIcon />}
-      rightButton={<span className="text-gray-500">{"임시 저장"}</span>}
+      leftButton={<ChevronLeft />}
+      rightButton={"Edit"}
       onClickLeftButton={onClickLeftButton}
       onClickRightButton={onClickRightButton}
-      title={"내 가구 팔기"}
+      title={"알림"}
     />
   );
 }
