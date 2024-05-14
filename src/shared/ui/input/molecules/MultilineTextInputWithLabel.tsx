@@ -12,9 +12,7 @@ export function MultilineTextInputWithLabel({
 }) {
   return (
     <div className="flex flex-col items-start gap-4 self-stretch">
-      <label className="font-sans text-[1.0625rem] font-bold leading-[132%] text-black">
-        {label}
-      </label>
+      <label className="font-body-2 font-sans text-black">{label}</label>
       <textarea
         className="flex h-56 items-center gap-2.5 self-stretch rounded border border-gray-200 p-4 font-sans leading-[140%] text-gray-950 "
         placeholder={placeholder}

@@ -14,9 +14,7 @@ export function StringInputWithLabel({
 }) {
   return (
     <div className="flex flex-col items-start gap-4 self-stretch">
-      <label className="font-sans text-[1.0625rem] font-bold leading-[132%] text-black">
-        {label}
-      </label>
+      <label className="font-body-2 font-sans text-black">{label}</label>
       <Input
         placeholder={placeholder}
         type={"string"}
