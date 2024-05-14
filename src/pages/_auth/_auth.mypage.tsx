@@ -1,22 +1,44 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
-import {
-  Bell,
-  ChevronRight,
-  CircleUserRound,
-  FileSpreadsheet,
-  Heart,
-  HomeIcon,
-  ShoppingBag,
-  WalletCards,
-} from "lucide-react";
 
 import useAuth from "@/features/auth";
+import useMouseSnapSlide from "@/shared/lib/useMouseSnapSlide";
+import ShoppingBag from "@/shared/ui/icon/bag.svg?react";
+import BellIcon from "@/shared/ui/icon/bellOutline.svg?react";
+import ChevronRight from "@/shared/ui/icon/chevronLeft.svg?react";
+import DefaultUserProfile from "@/shared/ui/icon/defaultProfile.svg?react";
+import Heart from "@/shared/ui/icon/heart.svg?react";
+import HomeIcon from "@/shared/ui/icon/home.svg?react";
+import ReceiptIcon from "@/shared/ui/icon/receipt.svg?react";
+import ItemInfo from "@/shared/ui/itemInfo";
+import { LinkContainerProps } from "@/shared/ui/linkContainer";
+import LinkContainerList from "@/shared/ui/linkContainer/list";
 
 export const Route = createFileRoute("/_auth/_auth/mypage")({
   component: MyPageComponent,
 });
 
+const headerLinkList = [
+  { text: "관심목록", icon: <Heart /> },
+  { text: "판매내역", icon: <ReceiptIcon /> },
+  { text: "구매내역", icon: <ShoppingBag /> },
+] satisfies LinkContainerProps[];
+
+const footerLinkList = [
+  { text: "채팅 관리" },
+  { text: "내 정보 변경" },
+  { text: "고객센터" },
+  { text: "회원 탈퇴" },
+] satisfies LinkContainerProps[];
+
+const _tempSameCategoryImages_WILL_BE_REMOVED_AFTER_API_READY = Array(6).fill({
+  src: "https://cdn.pixabay.com/photo/2023/08/02/18/21/yoga-8165759_1280.jpg",
+  itemName: "아크릴체어",
+  price: 30000,
+  date: "3일 전",
+});
+
 function MyPageComponent() {
+  const { callbacks } = useMouseSnapSlide({ speed: 1 });
   const auth = useAuth();
   const router = useRouter();
   const navigate = Route.useNavigate();
@@ -30,81 +52,65 @@ function MyPageComponent() {
   };
   return (
     <div className="relative h-full w-full">
-      <nav className="top-0 z-10 flex w-full justify-between p-4">
-        <span>마이페이지</span>
-        <div className="flex gap-4">
+      <nav className="top-0 z-10 flex w-full items-center justify-between p-10">
+        <span className="font-header-1">마이페이지</span>
+        <div className="flex shrink-0 items-center gap-4">
           <Link to="/">
-            <HomeIcon stroke="black" />
+            <HomeIcon width={30} height={30} />
           </Link>
-          <Bell stroke="black" />
+          <div className="flex items-center justify-center">
+            <BellIcon width={40} height={40} />
+          </div>
         </div>
       </nav>
-      <main className="w-full overflow-scroll p-4 scrollbar-hide">
-        <div className="flex items-center justify-between py-2">
-          <div className="flex items-center gap-2">
-            <CircleUserRound height={30} width={30} />
-            <div className="flex flex-col text-sm">
-              <span className="font-bold">{auth.user}</span>
-              <span className="text-xs text-slate-400">
+      <main className="flex w-full flex-col gap-10 overflow-scroll p-8 scrollbar-hide">
+        <div className="flex items-center justify-between gap-10">
+          <div className="relative flex shrink-0 flex-row items-center justify-start gap-4 self-stretch ">
+            <DefaultUserProfile
+              height={64}
+              width={64}
+              className="text-gray-200"
+            />
+            <div className="flex flex-col text-sm text-black">
+              <span className="font-body-3 font-bold">{auth.user}</span>
+              <span className="font-body-4 text-gray-500">
                 중랑구 면목동 #1234abcd
               </span>
             </div>
           </div>
           <button onClick={handleLogout}>
-            <ChevronRight stroke="gray" />
+            <ChevronRight
+              transform="rotate(180)"
+              width={16}
+              height={16}
+              className="text-gray-500"
+            />
           </button>
         </div>
-        <div className="flex w-full flex-1 justify-between p-4">
-          <div className="flex flex-col items-center gap-1">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground">
-              <Heart fill="var(--primary)" />
-            </div>
-            <span className="text-sm">관심목록</span>
-          </div>
-          <div className="flex flex-col items-center gap-1">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground">
-              <FileSpreadsheet />
-            </div>
-            <span className="text-sm">판매내역</span>
-          </div>
-          <div className="flex flex-col items-center gap-1">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground">
-              <ShoppingBag />
-            </div>
-            <span className="text-sm">구매내역</span>
-          </div>
-          <div className="flex flex-col items-center gap-1">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground">
-              <WalletCards />
-            </div>
-            <span className="text-sm">가계부</span>
-          </div>
-        </div>
+        <LinkContainerList variant="secondary" list={headerLinkList} />
         <div>
           <div className="flex justify-between">
             <h2>최근 본 상품</h2>
-            <ChevronRight stroke="gray" />
+            <ChevronRight
+              transform="rotate(180)"
+              width={16}
+              height={16}
+              className="text-gray-500"
+            />
           </div>
-          <div className="mt-4 h-24 rounded-sm bg-slate-300"></div>
+
+          <div
+            className="relative flex shrink-0 flex-row items-start justify-start gap-4 self-stretch overflow-auto pb-2 pt-2 scrollbar-hide"
+            {...callbacks}
+          >
+            {_tempSameCategoryImages_WILL_BE_REMOVED_AFTER_API_READY.map(
+              (_itemInfo, idx) => (
+                <ItemInfo key={idx} {..._itemInfo} />
+              )
+            )}
+          </div>
         </div>
-        <ul className="flex flex-col gap-2 py-4">
-          <li className="flex justify-between border-b py-4">
-            <h2>채팅 관리</h2>
-            <ChevronRight width={16} height={16} stroke="gray" />
-          </li>
-          <li className="flex justify-between border-b py-4">
-            <h2>내 정보 변경</h2>
-            <ChevronRight width={16} height={16} stroke="gray" />
-          </li>
-          <li className="flex justify-between border-b py-4">
-            <h2>고객센터</h2>
-            <ChevronRight width={16} height={16} stroke="gray" />
-          </li>
-          <li className="flex justify-between py-4">
-            <h2>회원 탈퇴</h2>
-            <ChevronRight width={16} height={16} stroke="gray" />
-          </li>
-        </ul>
+        <LinkContainerList list={footerLinkList} />
       </main>
     </div>
   );
