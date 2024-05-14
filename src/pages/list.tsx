@@ -12,6 +12,27 @@ export const Route = createFileRoute("/list")({
   component: ListComponent,
 });
 
+interface Product {
+  id: number;
+  name: string;
+  imageUrl: string;
+  location: string;
+  date: string;
+  price: number;
+  chatCount: number;
+  likeCount: number;
+}
+
+const products: Product[] = Array.from({ length: 9 }, (_, index) => ({
+  id: index,
+  name: "에어팟 프로",
+  imageUrl: "image.svg",
+  location: "군자동",
+  date: "3일 전",
+  price: 220000,
+  chatCount: 3,
+  likeCount: 2,
+}));
 function ListComponent() {
   return (
     <>
@@ -39,376 +60,45 @@ function ListComponent() {
           </div>
 
           <div className="list relative mb-[-150.00px] flex h-[93%] flex-col gap-[16px] self-stretch overflow-y-scroll scrollbar-hide">
-            <div className="relative flex w-full gap-[16px]  self-stretch  border-b border-solid border-[#0000004c] border-gray-300">
-              <img
-                className="relative h-[110px] w-[110px]"
-                alt="Rectangle"
-                src="image.svg"
-              />
-              <div className="relative flex flex-1 flex-col self-stretch">
-                <div className="relative inline-flex flex-1  flex-col gap-[5px]">
-                  <div className="font-body-3 relative ">에어팟 프로</div>
-                  <div className="font-body-3 relative  inline-flex items-start gap-[4px] text-[#8c8c8c] ">
-                    <div>군자동</div>
-                    <div>·</div>
-                    <div>3일 전</div>
-                  </div>
-                  <div className="font-body-3 font-bold  text-[#4096ed]">
-                    220,000원
-                  </div>
-                </div>
-                <div className="font-body-3 relative flex justify-end gap-[10px] text-[#8c8c8c]">
-                  <div className="relative inline-flex items-center gap-[2px]">
-                    <ChatIcon />
-                    <span>3</span>
-                  </div>
-                  <div className="relative inline-flex items-center gap-[2px]">
-                    <LikeIcon />
-                    <span>2</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="relative flex w-full flex-[0_0_auto] items-start gap-[16px] self-stretch  border-b border-solid border-[#0000004c] border-gray-300">
-              <img
-                className="relative h-[110px] w-[110px]"
-                alt="Rectangle"
-                src="image.svg"
-              />
-              <div className="relative flex flex-1 grow flex-col items-start gap-[4px] self-stretch">
-                <div className="relative inline-flex flex-1 grow flex-col items-start gap-[4px]">
-                  <div className="font-16 relative mt-[-1.00px] w-[232px] text-[length:var(--16-font-size)] font-[number:var(--16-font-weight)] leading-[var(--16-line-height)] tracking-[var(--16-letter-spacing)] text-black [font-style:var(--16-font-style)]">
-                    에어팟 프로
-                  </div>
-                  <div className="relative inline-flex flex-[0_0_auto] items-start gap-[4px]">
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      군자동
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="relative flex w-full gap-[16px]  self-stretch  border-b border-solid border-[#0000004c] border-gray-300"
+              >
+                <img
+                  className="relative h-[110px] w-[110px]"
+                  alt="Rectangle"
+                  src={product.imageUrl}
+                />
+                <div className="relative flex flex-1 flex-col self-stretch">
+                  <div className="relative inline-flex flex-1  flex-col gap-[5px]">
+                    <div className="font-body-3 relative ">{product.name}</div>
+                    <div className="font-body-3 relative  inline-flex items-start gap-[4px] text-[#8c8c8c] ">
+                      <div>{product.location}</div>
+                      <div>·</div>
+                      <div>{product.date}</div>
                     </div>
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      ·
-                    </div>
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      3일 전
+                    <div className="font-body-3 font-bold  text-[#4096ed]">
+                      {product.price}
                     </div>
                   </div>
-                  <div className="relative w-fit whitespace-nowrap text-[15px] font-bold leading-[22px] tracking-[0] text-[#4096ed] [font-family:'Inter-Bold',Helvetica]">
-                    220,000원
-                  </div>
-                </div>
-                <div className="relative flex w-full flex-[0_0_auto] items-center justify-end gap-[4px] self-stretch">
-                  <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <ChatIcon />
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      3
+                  <div className="font-body-3 relative flex justify-end gap-[10px] text-[#8c8c8c]">
+                    <div className="relative inline-flex items-center gap-[2px]">
+                      <ChatIcon />
+                      <span>{product.chatCount}</span>
                     </div>
-                  </div>
-                  <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <LikeIcon />
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      2
+                    <div className="relative inline-flex items-center gap-[2px]">
+                      <LikeIcon />
+                      <span>{product.likeCount}</span>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="relative flex w-full flex-[0_0_auto] items-start gap-[16px] self-stretch  border-b border-solid border-[#0000004c] border-gray-300">
-              <img
-                className="relative h-[110px] w-[110px]"
-                alt="Rectangle"
-                src="image.svg"
-              />
-              <div className="relative flex flex-1 grow flex-col items-start gap-[4px] self-stretch">
-                <div className="relative inline-flex flex-1 grow flex-col items-start gap-[4px]">
-                  <div className="font-16 relative mt-[-1.00px] w-[232px] text-[length:var(--16-font-size)] font-[number:var(--16-font-weight)] leading-[var(--16-line-height)] tracking-[var(--16-letter-spacing)] text-black [font-style:var(--16-font-style)]">
-                    에어팟 프로
-                  </div>
-                  <div className="relative inline-flex flex-[0_0_auto] items-start gap-[4px]">
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      군자동
-                    </div>
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      ·
-                    </div>
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      3일 전
-                    </div>
-                  </div>
-                  <div className="relative w-fit whitespace-nowrap text-[15px] font-bold leading-[22px] tracking-[0] text-[#4096ed] [font-family:'Inter-Bold',Helvetica]">
-                    220,000원
-                  </div>
-                </div>
-                <div className="relative flex w-full flex-[0_0_auto] items-center justify-end gap-[4px] self-stretch">
-                  <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <ChatIcon />
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      3
-                    </div>
-                  </div>
-                  <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <LikeIcon />
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      2
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="relative flex w-full flex-[0_0_auto] items-start gap-[16px] self-stretch  border-b border-solid border-[#0000004c] border-gray-300">
-              <img
-                className="relative h-[110px] w-[110px]"
-                alt="Rectangle"
-                src="image.svg"
-              />
-              <div className="relative flex flex-1 grow flex-col items-start gap-[4px] self-stretch">
-                <div className="relative inline-flex flex-1 grow flex-col items-start gap-[4px]">
-                  <div className="font-16 relative mt-[-1.00px] w-[232px] text-[length:var(--16-font-size)] font-[number:var(--16-font-weight)] leading-[var(--16-line-height)] tracking-[var(--16-letter-spacing)] text-black [font-style:var(--16-font-style)]">
-                    에어팟 프로
-                  </div>
-                  <div className="relative inline-flex flex-[0_0_auto] items-start gap-[4px]">
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      군자동
-                    </div>
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      ·
-                    </div>
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      3일 전
-                    </div>
-                  </div>
-                  <div className="relative w-fit whitespace-nowrap text-[15px] font-bold leading-[22px] tracking-[0] text-[#4096ed] [font-family:'Inter-Bold',Helvetica]">
-                    220,000원
-                  </div>
-                </div>
-                <div className="relative flex w-full flex-[0_0_auto] items-center justify-end gap-[4px] self-stretch">
-                  <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <ChatIcon />
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      3
-                    </div>
-                  </div>
-                  <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <LikeIcon />
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      2
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="relative flex w-full flex-[0_0_auto] items-start gap-[16px] self-stretch  border-b border-solid border-[#0000004c] border-gray-300">
-              <img
-                className="relative h-[110px] w-[110px]"
-                alt="Rectangle"
-                src="image.svg"
-              />
-              <div className="relative flex flex-1 grow flex-col items-start gap-[4px] self-stretch">
-                <div className="relative inline-flex flex-1 grow flex-col items-start gap-[4px]">
-                  <div className="font-16 relative mt-[-1.00px] w-[232px] text-[length:var(--16-font-size)] font-[number:var(--16-font-weight)] leading-[var(--16-line-height)] tracking-[var(--16-letter-spacing)] text-black [font-style:var(--16-font-style)]">
-                    에어팟 프로
-                  </div>
-                  <div className="relative inline-flex flex-[0_0_auto] items-start gap-[4px]">
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      군자동
-                    </div>
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      ·
-                    </div>
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      3일 전
-                    </div>
-                  </div>
-                  <div className="relative w-fit whitespace-nowrap text-[15px] font-bold leading-[22px] tracking-[0] text-[#4096ed] [font-family:'Inter-Bold',Helvetica]">
-                    220,000원
-                  </div>
-                </div>
-                <div className="relative flex w-full flex-[0_0_auto] items-center justify-end gap-[4px] self-stretch">
-                  <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <ChatIcon />
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      3
-                    </div>
-                  </div>
-                  <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <LikeIcon />
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      2
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="relative flex w-full flex-[0_0_auto] items-start gap-[16px] self-stretch  border-b border-solid border-[#0000004c] border-gray-300">
-              <img
-                className="relative h-[110px] w-[110px]"
-                alt="Rectangle"
-                src="image.svg"
-              />
-              <div className="relative flex flex-1 grow flex-col items-start gap-[4px] self-stretch">
-                <div className="relative inline-flex flex-1 grow flex-col items-start gap-[4px]">
-                  <div className="font-16 relative mt-[-1.00px] w-[232px] text-[length:var(--16-font-size)] font-[number:var(--16-font-weight)] leading-[var(--16-line-height)] tracking-[var(--16-letter-spacing)] text-black [font-style:var(--16-font-style)]">
-                    에어팟 프로
-                  </div>
-                  <div className="relative inline-flex flex-[0_0_auto] items-start gap-[4px]">
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      군자동
-                    </div>
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      ·
-                    </div>
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      3일 전
-                    </div>
-                  </div>
-                  <div className="relative w-fit whitespace-nowrap text-[15px] font-bold leading-[22px] tracking-[0] text-[#4096ed] [font-family:'Inter-Bold',Helvetica]">
-                    220,000원
-                  </div>
-                </div>
-                <div className="relative flex w-full flex-[0_0_auto] items-center justify-end gap-[4px] self-stretch">
-                  <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <ChatIcon />
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      3
-                    </div>
-                  </div>
-                  <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <LikeIcon />
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      2
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="relative flex w-full flex-[0_0_auto] items-start gap-[16px] self-stretch  border-b border-solid border-[#0000004c] border-gray-300">
-              <img
-                className="relative h-[110px] w-[110px]"
-                alt="Rectangle"
-                src="image.svg"
-              />
-              <div className="relative flex flex-1 grow flex-col items-start gap-[4px] self-stretch">
-                <div className="relative inline-flex flex-1 grow flex-col items-start gap-[4px]">
-                  <div className="font-16 relative mt-[-1.00px] w-[232px] text-[length:var(--16-font-size)] font-[number:var(--16-font-weight)] leading-[var(--16-line-height)] tracking-[var(--16-letter-spacing)] text-black [font-style:var(--16-font-style)]">
-                    에어팟 프로
-                  </div>
-                  <div className="relative inline-flex flex-[0_0_auto] items-start gap-[4px]">
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      군자동
-                    </div>
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      ·
-                    </div>
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      3일 전
-                    </div>
-                  </div>
-                  <div className="relative w-fit whitespace-nowrap text-[15px] font-bold leading-[22px] tracking-[0] text-[#4096ed] [font-family:'Inter-Bold',Helvetica]">
-                    220,000원
-                  </div>
-                </div>
-                <div className="relative flex w-full flex-[0_0_auto] items-center justify-end gap-[4px] self-stretch">
-                  <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <ChatIcon />
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      3
-                    </div>
-                  </div>
-                  <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <LikeIcon />
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      2
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="relative flex w-full flex-[0_0_auto] items-start gap-[16px] self-stretch  border-b border-solid border-[#0000004c] border-gray-300">
-              <img
-                className="relative h-[110px] w-[110px]"
-                alt="Rectangle"
-                src="image.svg"
-              />
-              <div className="relative flex flex-1 grow flex-col items-start gap-[4px] self-stretch">
-                <div className="relative inline-flex flex-1 grow flex-col items-start gap-[4px]">
-                  <div className="font-16 relative mt-[-1.00px] w-[232px] text-[length:var(--16-font-size)] font-[number:var(--16-font-weight)] leading-[var(--16-line-height)] tracking-[var(--16-letter-spacing)] text-black [font-style:var(--16-font-style)]">
-                    에어팟 프로
-                  </div>
-                  <div className="relative inline-flex flex-[0_0_auto] items-start gap-[4px]">
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      군자동
-                    </div>
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      ·
-                    </div>
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      3일 전
-                    </div>
-                  </div>
-                  <div className="relative w-fit whitespace-nowrap text-[15px] font-bold leading-[22px] tracking-[0] text-[#4096ed] [font-family:'Inter-Bold',Helvetica]">
-                    220,000원
-                  </div>
-                </div>
-                <div className="relative flex w-full flex-[0_0_auto] items-center justify-end gap-[4px] self-stretch">
-                  <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <ChatIcon />
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      3
-                    </div>
-                  </div>
-                  <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <LikeIcon />
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      2
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="relative flex w-full flex-[0_0_auto] items-start gap-[16px] self-stretch  border-b border-solid border-[#0000004c] border-gray-300">
-              <img
-                className="relative h-[110px] w-[110px]"
-                alt="Rectangle"
-                src="image.svg"
-              />
-              <div className="relative flex flex-1 grow flex-col items-start gap-[4px] self-stretch">
-                <div className="relative inline-flex flex-1 grow flex-col items-start gap-[4px]">
-                  <div className="font-16 relative mt-[-1.00px] w-[232px] text-[length:var(--16-font-size)] font-[number:var(--16-font-weight)] leading-[var(--16-line-height)] tracking-[var(--16-letter-spacing)] text-black [font-style:var(--16-font-style)]">
-                    에어팟 프로
-                  </div>
-                  <div className="relative inline-flex flex-[0_0_auto] items-start gap-[4px]">
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      군자동
-                    </div>
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      ·
-                    </div>
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      3일 전
-                    </div>
-                  </div>
-                  <div className="relative w-fit whitespace-nowrap text-[15px] font-bold leading-[22px] tracking-[0] text-[#4096ed] [font-family:'Inter-Bold',Helvetica]">
-                    220,000원
-                  </div>
-                </div>
-                <div className="relative flex w-full flex-[0_0_auto] items-center justify-end gap-[4px] self-stretch">
-                  <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <ChatIcon />
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      3
-                    </div>
-                  </div>
-                  <div className="relative inline-flex flex-[0_0_auto] items-center gap-[2px]">
-                    <LikeIcon />
-                    <div className="font-12 relative mt-[-1.00px] w-fit whitespace-nowrap text-[length:var(--12-font-size)] font-[number:var(--12-font-weight)] leading-[var(--12-line-height)] tracking-[var(--12-letter-spacing)] text-[#8c8c8c] [font-style:var(--12-font-style)]">
-                      2
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
-        <div className="absolute left-[85%] top-[90%] flex h-[50px] w-[50px] items-start gap-[10px] rounded-[100px] bg-[#99ccff] p-[12px] shadow-[0px_4px_12px_#0000001f]">
+        <div className="absolute left-[85%] top-[90%]  h-[50px] w-[50px] gap-[10px] rounded-[100px] bg-[#99ccff] p-[12px] shadow-[0px_4px_12px_#0000001f]">
           <PlusIcon />
         </div>
       </div>
