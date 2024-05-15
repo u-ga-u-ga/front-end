@@ -96,11 +96,11 @@ function DetailComponent() {
           }}
         />
         <div className="h-full border-l border-solid border-slate-300"></div>
-        <div className="flex flex-1 flex-col justify-start">
+        <div className="flex flex-1 flex-col justify-start ">
           <span>{data.price.toLocaleString()}원</span>
           <span>{data.canBeDeal ? "가격 제안 가능" : "가격 제안 불가"}</span>
         </div>
-        <Button>채팅하기</Button>
+        <Button size="lg">채팅하기</Button>
       </footer>
     </div>
   );
