@@ -6,16 +6,15 @@ export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, value = "defaultValue", ...props }, ref) => {
+  ({ className, type, ...props }, ref) => {
     return (
       <input
         type={type}
         className={cn(
-          "placeholder font-body-3 flex h-16 items-center gap-2.5 self-stretch rounded border border-gray-200 p-4 font-sans  text-black",
+          "placeholder font-body-3 flex h-14 items-center gap-2.5 self-stretch rounded border border-gray-200 p-4 font-sans  text-black",
           className
         )}
         ref={ref}
-        value={value}
         {...props}
       />
     );
