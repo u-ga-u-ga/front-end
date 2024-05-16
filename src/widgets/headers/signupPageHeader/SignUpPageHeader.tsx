@@ -1,7 +1,8 @@
-import { CrossIcon } from "@/shared/ui";
 import { Type3Header } from "@/shared/ui/headerProptotype/Type3Header";
+import ChevronLeft from "@/shared/ui/icon/chevronLeft.svg?react";
+import Home from "@/shared/ui/icon/home.svg?react";
 
-export function RegisterItemPageHeader({
+export function SignUpPageHeader({
   onClickLeftButton,
   onClickRightButton,
 }: {
@@ -10,11 +11,11 @@ export function RegisterItemPageHeader({
 }) {
   return (
     <Type3Header
-      leftButton={<CrossIcon />}
-      rightButton={<span className="text-gray-500">{"임시 저장"}</span>}
+      title={"회원 가입"}
+      leftButton={<ChevronLeft />}
+      rightButton={<Home />}
       onClickLeftButton={onClickLeftButton}
       onClickRightButton={onClickRightButton}
-      title={"내 가구 팔기"}
     />
   );
 }

@@ -2,7 +2,6 @@ import { ItemImagesUploadForm } from "@/features/itemImagesUpload";
 import {
   Input,
   MultilineTextInputWithLabel,
-  NumberInputWithLabel,
   SingleChoice,
   StringInputWithLabel,
 } from "@/shared/ui";

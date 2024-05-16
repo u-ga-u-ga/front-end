@@ -3,3 +3,5 @@ export { MultilineTextInputWithLabel } from "./molecules/MultilineTextInputWithL
 export { NumberInputWithLabel } from "./molecules/NumberInputWithLabel";
 export { SingleChoice } from "./molecules/SingleChoice";
 export { StringInputWithLabel } from "./molecules/StringInputWithLabel";
+export { AddressInput } from "./organisms/AddressInput";
+export { MobileNumberInput } from "./organisms/MobileNumberInput";

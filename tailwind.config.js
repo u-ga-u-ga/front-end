@@ -46,6 +46,10 @@ export const theme = {
         200: "#D9D9D9",
         500: "#8C8C8C",
       },
+      destructive: {
+        DEFAULT: "#EF4444",
+        dark: "#D20001",
+      },
       // 이하 기존 색상
       border: "hsl(var(--border))",
       input: "hsl(var(--input))",
@@ -55,10 +59,6 @@ export const theme = {
       secondary: {
         DEFAULT: "hsl(var(--secondary))",
         foreground: "hsl(var(--secondary-foreground))",
-      },
-      destructive: {
-        DEFAULT: "hsl(var(--destructive))",
-        foreground: "hsl(var(--destructive-foreground))",
       },
       muted: {
         DEFAULT: "hsl(var(--muted))",
@@ -154,7 +154,7 @@ export const plugins = [
         fontFamily: theme("fontFamily.sans"),
         fontSize: theme("fontSize.base[0]"),
         lineHeight: theme("fontSize.base[1]"),
-        fontWeight: theme("fontWeight.normal"),
+        fontWeight: theme("fontWeight.bold"),
       },
       ".font-body-3": {
         fontFamily: theme("fontFamily.sans"),
