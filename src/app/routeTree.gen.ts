@@ -18,7 +18,6 @@ import { Route as IndexImport } from './../pages/index'
 import { Route as SignupIndexImport } from './../pages/Signup/index'
 import { Route as RegisterItemIndexImport } from './../pages/RegisterItem/index'
 import { Route as AuthAuthImport } from './../pages/_auth/_auth'
-import { Route as SignupSignupPageImport } from './../pages/Signup/SignupPage'
 import { Route as AuthAuthMypageImport } from './../pages/_auth/_auth.mypage'
 
 // Create/Update Routes
@@ -58,11 +57,6 @@ const AuthAuthRoute = AuthAuthImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const SignupSignupPageRoute = SignupSignupPageImport.update({
-  path: '/Signup/SignupPage',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const AuthAuthMypageRoute = AuthAuthMypageImport.update({
   path: '/mypage',
   getParentRoute: () => AuthAuthRoute,
@@ -86,10 +80,6 @@ declare module '@tanstack/react-router' {
     }
     '/login': {
       preLoaderRoute: typeof LoginImport
-      parentRoute: typeof rootRoute
-    }
-    '/Signup/SignupPage': {
-      preLoaderRoute: typeof SignupSignupPageImport
       parentRoute: typeof rootRoute
     }
     '/_auth/_auth': {
@@ -118,7 +108,6 @@ export const routeTree = rootRoute.addChildren([
   DetailRoute,
   ListRoute,
   LoginRoute,
-  SignupSignupPageRoute,
   AuthAuthRoute.addChildren([AuthAuthMypageRoute]),
   RegisterItemIndexRoute,
   SignupIndexRoute,
