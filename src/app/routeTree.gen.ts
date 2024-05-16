@@ -10,104 +10,113 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './../pages/__root'
-import { Route as LoginImport } from './../pages/login'
-import { Route as ListImport } from './../pages/list'
-import { Route as DetailImport } from './../pages/detail'
-import { Route as IndexImport } from './../pages/index'
-import { Route as SignupIndexImport } from './../pages/Signup/index'
-import { Route as RegisterItemIndexImport } from './../pages/RegisterItem/index'
-import { Route as AuthAuthImport } from './../pages/_auth/_auth'
-import { Route as AuthMypageWithdrawalImport } from './../pages/_auth/mypage/withdrawal'
-import { Route as AuthAuthMypageImport } from './../pages/_auth/_auth.mypage'
+import { Route as rootRoute } from "./../pages/__root";
+import { Route as LoginImport } from "./../pages/login";
+import { Route as ListImport } from "./../pages/list";
+import { Route as DetailImport } from "./../pages/detail";
+import { Route as IndexImport } from "./../pages/index";
+import { Route as SignupIndexImport } from "./../pages/Signup/index";
+import { Route as RegisterItemIndexImport } from "./../pages/RegisterItem/index";
+import { Route as AuthAuthImport } from "./../pages/_auth/_auth";
+import { Route as AuthMypageWithdrawalImport } from "./../pages/_auth/mypage/withdrawal";
+import { Route as AuthAuthMypageImport } from "./../pages/_auth/_auth.mypage";
 
 // Create/Update Routes
 
 const LoginRoute = LoginImport.update({
-  path: '/login',
+  path: "/login",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const ListRoute = ListImport.update({
-  path: '/list',
+  path: "/list",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const DetailRoute = DetailImport.update({
-  path: '/detail',
+  path: "/detail",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const IndexRoute = IndexImport.update({
-  path: '/',
+  path: "/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const SignupIndexRoute = SignupIndexImport.update({
-  path: '/Signup/',
+  path: "/Signup/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const RegisterItemIndexRoute = RegisterItemIndexImport.update({
-  path: '/RegisterItem/',
+  path: "/RegisterItem/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const AuthAuthRoute = AuthAuthImport.update({
-  id: '/_auth/_auth',
+  id: "/_auth/_auth",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const AuthMypageWithdrawalRoute = AuthMypageWithdrawalImport.update({
-  path: '/mypage/withdrawal',
+  path: "/mypage/withdrawal",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
+
+const AuthMypageWithdrawalRoute = AuthMypageWithdrawalImport.update({
+  path: "/mypage/withdrawal",
+  getParentRoute: () => rootRoute,
+} as any);
 
 const AuthAuthMypageRoute = AuthAuthMypageImport.update({
-  path: '/mypage',
+  path: "/mypage",
   getParentRoute: () => AuthAuthRoute,
-} as any)
+} as any);
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/': {
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/detail': {
-      preLoaderRoute: typeof DetailImport
-      parentRoute: typeof rootRoute
-    }
-    '/list': {
-      preLoaderRoute: typeof ListImport
-      parentRoute: typeof rootRoute
-    }
-    '/login': {
-      preLoaderRoute: typeof LoginImport
-      parentRoute: typeof rootRoute
-    }
-    '/_auth/_auth': {
-      preLoaderRoute: typeof AuthAuthImport
-      parentRoute: typeof rootRoute
-    }
-    '/RegisterItem/': {
-      preLoaderRoute: typeof RegisterItemIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/Signup/': {
-      preLoaderRoute: typeof SignupIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/_auth/_auth/mypage': {
-      preLoaderRoute: typeof AuthAuthMypageImport
-      parentRoute: typeof AuthAuthImport
-    }
-    '/_auth/mypage/withdrawal': {
-      preLoaderRoute: typeof AuthMypageWithdrawalImport
-      parentRoute: typeof rootRoute
-    }
+    "/": {
+      preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/detail": {
+      preLoaderRoute: typeof DetailImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/list": {
+      preLoaderRoute: typeof ListImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/login": {
+      preLoaderRoute: typeof LoginImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/_auth/_auth": {
+      preLoaderRoute: typeof AuthAuthImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/RegisterItem/": {
+      preLoaderRoute: typeof RegisterItemIndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/Signup/": {
+      preLoaderRoute: typeof SignupIndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/_auth/_auth/mypage": {
+      preLoaderRoute: typeof AuthAuthMypageImport;
+      parentRoute: typeof AuthAuthImport;
+    };
+    "/_auth/mypage/withdrawal": {
+      preLoaderRoute: typeof AuthMypageWithdrawalImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/_auth/mypage/withdrawal": {
+      preLoaderRoute: typeof AuthMypageWithdrawalImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
@@ -122,6 +131,6 @@ export const routeTree = rootRoute.addChildren([
   RegisterItemIndexRoute,
   SignupIndexRoute,
   AuthMypageWithdrawalRoute,
-])
+]);
 
 /* prettier-ignore-end */
