@@ -27,7 +27,7 @@ const footerLinkList = [
   { text: "채팅 관리" },
   { text: "내 정보 변경" },
   { text: "고객센터" },
-  { text: "회원 탈퇴" },
+  { text: "회원 탈퇴", to: "/mypage/withdrawal" },
 ] satisfies LinkContainerProps[];
 
 const _tempSameCategoryImages_WILL_BE_REMOVED_AFTER_API_READY = Array(6).fill({

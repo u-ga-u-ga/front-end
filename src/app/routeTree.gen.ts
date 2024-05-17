@@ -18,6 +18,7 @@ import { Route as IndexImport } from './../pages/index'
 import { Route as SignupIndexImport } from './../pages/Signup/index'
 import { Route as RegisterItemIndexImport } from './../pages/RegisterItem/index'
 import { Route as AuthAuthImport } from './../pages/_auth/_auth'
+import { Route as AuthMypageWithdrawalImport } from './../pages/_auth/mypage/withdrawal'
 import { Route as AuthAuthMypageImport } from './../pages/_auth/_auth.mypage'
 
 // Create/Update Routes
@@ -54,6 +55,11 @@ const RegisterItemIndexRoute = RegisterItemIndexImport.update({
 
 const AuthAuthRoute = AuthAuthImport.update({
   id: '/_auth/_auth',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthMypageWithdrawalRoute = AuthMypageWithdrawalImport.update({
+  path: '/mypage/withdrawal',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -98,6 +104,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthAuthMypageImport
       parentRoute: typeof AuthAuthImport
     }
+    '/_auth/mypage/withdrawal': {
+      preLoaderRoute: typeof AuthMypageWithdrawalImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -111,6 +121,7 @@ export const routeTree = rootRoute.addChildren([
   AuthAuthRoute.addChildren([AuthAuthMypageRoute]),
   RegisterItemIndexRoute,
   SignupIndexRoute,
+  AuthMypageWithdrawalRoute,
 ])
 
 /* prettier-ignore-end */

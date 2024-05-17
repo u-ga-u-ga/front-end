@@ -6,7 +6,7 @@ import LinkContainer from ".";
 
 type LinkContainerListProps = {
   variant?: "primary" | "secondary";
-  list: { text: string; icon?: React.ReactNode }[];
+  list: React.ComponentProps<typeof LinkContainer>[];
   className?: string;
 };
 
@@ -33,9 +33,8 @@ export default function LinkContainerList({
         <LinkContainer
           key={`${item.text}${idx}`}
           tagName={variant === "primary" ? "li" : "div"}
-          text={item.text}
-          icon={item.icon}
           variant={variant}
+          {...item}
         />
       ))}
     </ul>
