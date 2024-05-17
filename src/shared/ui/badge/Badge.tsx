@@ -12,19 +12,19 @@ export function Badge({
   const backgroundColor =
     type === "solid"
       ? color === "primary"
-        ? "bg-[#4097ee]"
-        : "bg-[#f1f1f1]"
+        ? "bg-primary-dark"
+        : "bg-white"
       : "[transparent]";
   const textColor =
     type === "solid"
       ? color === "primary"
-        ? "text-[white]"
-        : "text-[black]"
+        ? "text-white"
+        : "text-black"
       : color === "primary"
-        ? "text-[#4097ee]"
+        ? "text-primary-dark"
         : "text-gray-500";
   const borderColor =
-    color === "primary" ? "border-[#4097ee]" : "border-gray-500";
+    color === "primary" ? "border-primary-dark" : "border-gray-500";
 
   return (
     <div

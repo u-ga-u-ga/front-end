@@ -15,8 +15,10 @@ import { Route as LoginImport } from './../pages/login'
 import { Route as ListImport } from './../pages/list'
 import { Route as DetailImport } from './../pages/detail'
 import { Route as IndexImport } from './../pages/index'
+import { Route as SignupIndexImport } from './../pages/Signup/index'
 import { Route as RegisterItemIndexImport } from './../pages/RegisterItem/index'
 import { Route as AuthAuthImport } from './../pages/_auth/_auth'
+import { Route as AuthMypageWithdrawalImport } from './../pages/_auth/mypage/withdrawal'
 import { Route as AuthAuthMypageImport } from './../pages/_auth/_auth.mypage'
 
 // Create/Update Routes
@@ -41,6 +43,11 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const SignupIndexRoute = SignupIndexImport.update({
+  path: '/Signup/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const RegisterItemIndexRoute = RegisterItemIndexImport.update({
   path: '/RegisterItem/',
   getParentRoute: () => rootRoute,
@@ -48,6 +55,11 @@ const RegisterItemIndexRoute = RegisterItemIndexImport.update({
 
 const AuthAuthRoute = AuthAuthImport.update({
   id: '/_auth/_auth',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthMypageWithdrawalRoute = AuthMypageWithdrawalImport.update({
+  path: '/mypage/withdrawal',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -84,9 +96,17 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterItemIndexImport
       parentRoute: typeof rootRoute
     }
+    '/Signup/': {
+      preLoaderRoute: typeof SignupIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/_auth/_auth/mypage': {
       preLoaderRoute: typeof AuthAuthMypageImport
       parentRoute: typeof AuthAuthImport
+    }
+    '/_auth/mypage/withdrawal': {
+      preLoaderRoute: typeof AuthMypageWithdrawalImport
+      parentRoute: typeof rootRoute
     }
   }
 }
@@ -100,6 +120,8 @@ export const routeTree = rootRoute.addChildren([
   LoginRoute,
   AuthAuthRoute.addChildren([AuthAuthMypageRoute]),
   RegisterItemIndexRoute,
+  SignupIndexRoute,
+  AuthMypageWithdrawalRoute,
 ])
 
 /* prettier-ignore-end */

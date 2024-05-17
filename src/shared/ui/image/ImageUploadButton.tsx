@@ -18,7 +18,7 @@ const ImageUploadButton = forwardRef<
       onImageLoaded = () => {},
       onImageDeleted = () => {},
     },
-    ref,
+    ref
   ) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [dataUrl, setDataUrl] = useState<string>(defaultDataUrl);
@@ -45,7 +45,7 @@ const ImageUploadButton = forwardRef<
           className=" relative flex h-20 w-20 cursor-pointer flex-col items-center justify-center gap-2  rounded-2xl border border-gray-200   pt-1 transition-colors duration-200 ease-in-out hover:bg-gray-100"
         >
           <_CameraIcon />
-          <div className="select-none font-sans text-[.8125rem] leading-[130%] text-gray-200">
+          <div className=" font-body-4  select-none font-sans  text-gray-200">
             {imageIndex}/{totalNumImages}
           </div>
           {dataUrl.length ? (
@@ -66,7 +66,7 @@ const ImageUploadButton = forwardRef<
         />
       </>
     );
-  },
+  }
 );
 
 ImageUploadButton.displayName = "ImageUploadButton";

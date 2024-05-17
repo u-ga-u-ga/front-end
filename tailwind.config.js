@@ -50,6 +50,10 @@ export const theme = {
         200: "#D9D9D9",
         500: "#8C8C8C",
       },
+      destructive: {
+        DEFAULT: "#EF4444",
+        dark: "#D20001",
+      },
       // 이하 기존 색상
       border: "hsl(var(--border))",
       input: "hsl(var(--input))",
@@ -59,10 +63,6 @@ export const theme = {
       secondary: {
         DEFAULT: "hsl(var(--secondary))",
         foreground: "hsl(var(--secondary-foreground))",
-      },
-      destructive: {
-        DEFAULT: "hsl(var(--destructive))",
-        foreground: "hsl(var(--destructive-foreground))",
       },
       muted: {
         DEFAULT: "hsl(var(--muted))",

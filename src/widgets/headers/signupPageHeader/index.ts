@@ -1,0 +1,1 @@
+export { SignUpPageHeader } from "./SignUpPageHeader";

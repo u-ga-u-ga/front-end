@@ -48,7 +48,7 @@ function LoginComponent() {
   const onLogin: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     const { username, isSave, autoLogin } = Object.fromEntries(
-      new FormData(e.currentTarget),
+      new FormData(e.currentTarget)
     );
     if (!username) return window.alert("글자를 입력해주세요.");
     saveLoginInfo({
@@ -64,7 +64,7 @@ function LoginComponent() {
   return (
     <div className="flex flex-col gap-16">
       <header className="m-8 flex items-center justify-between">
-        <span className="text-[30px]">로그인</span>
+        <span className="font-header-1">로그인</span>
         <Link to={fallback}>
           <HomeIcon />
         </Link>
@@ -92,7 +92,7 @@ function LoginComponent() {
             <Checkbox name="isSave" defaultChecked={savedState?.isSave} />
           </label>
         </div>
-        <Button>로그인</Button>
+        <Button className="bg-primary-dark">로그인</Button>
       </form>
       <hr
         data-text="소셜 미디어로 로그인"

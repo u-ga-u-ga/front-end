@@ -5,18 +5,23 @@ export function NumberInputWithLabel({
   value,
   placeholder = "placeholder",
   onChangeValue,
+  isRequired = false,
   ...props
 }: {
   label: string;
   value: number;
   placeholder?: string;
   onChangeValue: (newValue: number) => void;
+  isRequired?: boolean;
 }) {
   return (
     <div className="flex flex-col items-start gap-4 self-stretch">
-      <label className="font-sans text-[1.0625rem] font-bold leading-[132%] text-black">
-        {label}
-      </label>
+      <div className="flex items-center">
+        <label className="font-body-2 font-sans text-black">{label}</label>
+        {isRequired && (
+          <span className="font-body-2 font-sans text-destructive">*</span>
+        )}
+      </div>
       <Input
         placeholder={placeholder}
         type={"number"}

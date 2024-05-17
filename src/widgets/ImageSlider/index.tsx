@@ -1,12 +1,7 @@
-import {
-  HTMLAttributes,
-  ImgHTMLAttributes,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { HTMLAttributes, ImgHTMLAttributes, useMemo, useState } from "react";
 import { clsx } from "clsx";
 
+import useMouseSnapSlide from "@/shared/lib/useMouseSnapSlide";
 import { cn } from "@/shared/lib/utils";
 
 export default function ImageSlider({
@@ -15,40 +10,16 @@ export default function ImageSlider({
   ...props
 }: HTMLAttributes<HTMLDivElement> & { srcList?: string[] }) {
   const [highLight, setHighLight] = useState<number>(0);
-  const isMouseDownRef = useRef<boolean>(false);
-  const startX = useRef<number>(0);
-  const scrollLeftRef = useRef<number>(0);
+  const { callbacks } = useMouseSnapSlide({ speed: 3 });
   return (
     <div className={cn("relative", className)} {...props}>
       <div
         role="scrollbar"
         className={cn(
           "relative flex h-[25rem] snap-x snap-mandatory",
-          "scrollbar-hide overflow-x-auto",
+          "overflow-x-auto scrollbar-hide"
         )}
-        onMouseDown={(e) => {
-          const { currentTarget } = e;
-          isMouseDownRef.current = true;
-          startX.current = e.pageX - currentTarget.offsetLeft;
-          scrollLeftRef.current = currentTarget.scrollLeft;
-          currentTarget.style.scrollSnapType = "none";
-        }}
-        onMouseLeave={async (e) => {
-          isMouseDownRef.current = false;
-          e.currentTarget.style.removeProperty("scroll-snap-type");
-        }}
-        onMouseUp={async (e) => {
-          isMouseDownRef.current = false;
-          e.currentTarget.style.removeProperty("scroll-snap-type");
-        }}
-        onMouseMove={(e) => {
-          if (!isMouseDownRef.current) return;
-          e.preventDefault();
-          const { currentTarget } = e;
-          const x = e.pageX - currentTarget.offsetLeft;
-          const walk = x - startX.current;
-          currentTarget.scrollLeft = scrollLeftRef.current - walk;
-        }}
+        {...callbacks}
       >
         {srcList.map((src, idx) => (
           <ImageSliderItem
@@ -67,7 +38,7 @@ export default function ImageSlider({
             key={idx}
             className={clsx(
               highLight === idx ? "bg-white" : "bg-white/50",
-              "h-2 w-2 rounded-sm",
+              "h-2 w-2 rounded-sm"
             )}
           />
         ))}
@@ -75,6 +46,28 @@ export default function ImageSlider({
     </div>
   );
 }
+
+const createObserveCallbackRef = (
+  index: number,
+  dispatch?: (index: number) => void,
+  options?: IntersectionObserverInit
+) => {
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (
+        entry.isIntersecting &&
+        entry.intersectionRatio === options?.threshold &&
+        dispatch
+      ) {
+        dispatch(index);
+      }
+    }
+  }, options);
+  return (ref: HTMLElement | null) => {
+    if (ref) observer.observe(ref);
+    else observer.disconnect();
+  };
+};
 
 function ImageSliderItem({
   dispatch,
@@ -84,24 +77,10 @@ function ImageSliderItem({
   dispatch?: (index: number) => void;
   index: number;
 }) {
-  const itemRef = useRef<HTMLImageElement>(null);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (observers) => {
-        for (const observe of observers) {
-          if (
-            observe.isIntersecting &&
-            observe.intersectionRatio === 1 &&
-            dispatch
-          ) {
-            dispatch(index);
-          }
-        }
-      },
-      { threshold: 1 },
-    );
-    itemRef.current && observer.observe(itemRef.current);
-    return () => observer.disconnect();
-  }, [index, dispatch]);
-  return <img ref={itemRef} {...props}></img>;
+  const callbackRef = useMemo(
+    () => createObserveCallbackRef(index, dispatch, { threshold: 1 }),
+    [index, dispatch]
+  );
+
+  return <img ref={callbackRef} loading="lazy" {...props} />;
 }

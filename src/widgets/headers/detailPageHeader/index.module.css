@@ -1,0 +1,23 @@
+.nav {
+  --_animationStartsAfter: 0px;
+  --_animationDistance: 40rem;
+  --color: white;
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  color: var(--color);
+  animation: stickyNav linear forwards;
+
+  animation-timeline: view();
+  animation-range-start: calc(100vh + var(--_animationStartsAfter));
+  animation-range-end: calc(
+    100vh + var(--_animationStartsAfter) + var(--_animationDistance)
+  );
+}
+
+@keyframes stickyNav {
+  100% {
+    background-color: white;
+    --color: black;
+  }
+}
