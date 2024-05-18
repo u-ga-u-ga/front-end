@@ -14,6 +14,7 @@ import { Route as rootRoute } from './../pages/__root'
 import { Route as LoginImport } from './../pages/login'
 import { Route as ListImport } from './../pages/list'
 import { Route as DetailImport } from './../pages/detail'
+import { Route as CscenterImport } from './../pages/cscenter'
 import { Route as IndexImport } from './../pages/index'
 import { Route as SignupIndexImport } from './../pages/Signup/index'
 import { Route as RegisterItemIndexImport } from './../pages/RegisterItem/index'
@@ -35,6 +36,11 @@ const ListRoute = ListImport.update({
 
 const DetailRoute = DetailImport.update({
   path: '/detail',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CscenterRoute = CscenterImport.update({
+  path: '/cscenter',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -76,6 +82,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/cscenter': {
+      preLoaderRoute: typeof CscenterImport
+      parentRoute: typeof rootRoute
+    }
     '/detail': {
       preLoaderRoute: typeof DetailImport
       parentRoute: typeof rootRoute
@@ -115,6 +125,7 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
+  CscenterRoute,
   DetailRoute,
   ListRoute,
   LoginRoute,
