@@ -12,6 +12,7 @@ export default function CSNavigateBadgeList({
       {list.map((keyword) => (
         <Link
           key={keyword}
+          to="/cscenter"
           search={{
             keyword,
           }}
