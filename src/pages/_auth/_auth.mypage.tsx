@@ -26,7 +26,7 @@ const headerLinkList = [
 const footerLinkList = [
   { text: "채팅 관리" },
   { text: "내 정보 변경" },
-  { text: "고객센터" },
+  { text: "고객센터", to: "/cscenter" },
   { text: "회원 탈퇴", to: "/mypage/withdrawal" },
 ] satisfies LinkContainerProps[];
 
