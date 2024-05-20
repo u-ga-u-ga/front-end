@@ -1,5 +1,9 @@
 export default async (text: string) => {
-  if (navigator.clipboard) {
+  if (navigator.share) {
+    navigator.share({
+      url: text,
+    });
+  } else if (navigator.clipboard) {
     try {
       await navigator.clipboard.writeText(text);
       alert("copy success!!");

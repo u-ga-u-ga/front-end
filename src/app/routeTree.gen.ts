@@ -14,9 +14,12 @@ import { Route as rootRoute } from './../pages/__root'
 import { Route as LoginImport } from './../pages/login'
 import { Route as ListImport } from './../pages/list'
 import { Route as DetailImport } from './../pages/detail'
+import { Route as CscenterImport } from './../pages/cscenter'
 import { Route as IndexImport } from './../pages/index'
+import { Route as CscenterIndexImport } from './../pages/cscenter/index'
 import { Route as SignupIndexImport } from './../pages/Signup/index'
 import { Route as RegisterItemIndexImport } from './../pages/RegisterItem/index'
+import { Route as CscenterPostIdImport } from './../pages/cscenter/$postId'
 import { Route as AuthAuthImport } from './../pages/_auth/_auth'
 import { Route as AuthMypageWithdrawalImport } from './../pages/_auth/mypage/withdrawal'
 import { Route as AuthAuthMypageImport } from './../pages/_auth/_auth.mypage'
@@ -38,9 +41,19 @@ const DetailRoute = DetailImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const CscenterRoute = CscenterImport.update({
+  path: '/cscenter',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const CscenterIndexRoute = CscenterIndexImport.update({
+  path: '/',
+  getParentRoute: () => CscenterRoute,
 } as any)
 
 const SignupIndexRoute = SignupIndexImport.update({
@@ -51,6 +64,11 @@ const SignupIndexRoute = SignupIndexImport.update({
 const RegisterItemIndexRoute = RegisterItemIndexImport.update({
   path: '/RegisterItem/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const CscenterPostIdRoute = CscenterPostIdImport.update({
+  path: '/$postId',
+  getParentRoute: () => CscenterRoute,
 } as any)
 
 const AuthAuthRoute = AuthAuthImport.update({
@@ -76,6 +94,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/cscenter': {
+      preLoaderRoute: typeof CscenterImport
+      parentRoute: typeof rootRoute
+    }
     '/detail': {
       preLoaderRoute: typeof DetailImport
       parentRoute: typeof rootRoute
@@ -92,6 +114,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthAuthImport
       parentRoute: typeof rootRoute
     }
+    '/cscenter/$postId': {
+      preLoaderRoute: typeof CscenterPostIdImport
+      parentRoute: typeof CscenterImport
+    }
     '/RegisterItem/': {
       preLoaderRoute: typeof RegisterItemIndexImport
       parentRoute: typeof rootRoute
@@ -99,6 +125,10 @@ declare module '@tanstack/react-router' {
     '/Signup/': {
       preLoaderRoute: typeof SignupIndexImport
       parentRoute: typeof rootRoute
+    }
+    '/cscenter/': {
+      preLoaderRoute: typeof CscenterIndexImport
+      parentRoute: typeof CscenterImport
     }
     '/_auth/_auth/mypage': {
       preLoaderRoute: typeof AuthAuthMypageImport
@@ -115,6 +145,7 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
+  CscenterRoute.addChildren([CscenterPostIdRoute, CscenterIndexRoute]),
   DetailRoute,
   ListRoute,
   LoginRoute,

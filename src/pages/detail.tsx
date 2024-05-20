@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -27,9 +28,13 @@ const _tempSameCategoryImages_WILL_BE_REMOVED_AFTER_API_READY = Array(6).fill({
 function DetailComponent() {
   const { callbacks } = useMouseSnapSlide({ speed: 1 });
   const { data } = useSuspenseQuery(detailQueryOptions());
+  const containerRef = useRef<HTMLDivElement>(null);
   return (
-    <div className="relative h-full w-full overflow-scroll scrollbar-hide">
-      <DetailPageHeader />
+    <div
+      className="relative h-full w-full overflow-scroll scrollbar-hide"
+      ref={containerRef}
+    >
+      <DetailPageHeader _parent={containerRef} />
       <main className="absolute top-0 h-full w-full">
         <ImageSlider
           srcList={Array(10).fill(
@@ -80,7 +85,7 @@ function DetailComponent() {
               )}
             </div>
           </div>
-          <div className="h-36"></div>
+          <div className="h-[800px]"></div>
         </div>
       </main>
       <footer className="fixed bottom-0 flex h-16 w-[600px] items-center justify-between gap-3 border-t border-solid border-slate-300 bg-white p-2">
