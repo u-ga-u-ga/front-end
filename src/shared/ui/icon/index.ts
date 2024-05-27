@@ -13,5 +13,5 @@ export { default as Kakao } from "./kakao.svg?react";
 export { default as Naver } from "./naver.svg?react";
 export { default as Receipt } from "./receipt.svg?react";
 export { default as Search } from "./search.svg?react";
-export { default as Share } from "./share.svg?react";
 export { default as Settings } from "./settings.svg?react";
+export { default as Share } from "./share.svg?react";
