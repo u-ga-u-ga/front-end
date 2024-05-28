@@ -6,6 +6,7 @@ export function StringInputWithLabel({
   placeholder = "placeholder",
   onChangeValue,
   isRequired = false,
+  isPassword = false,
   ...props
 }: {
   label: string;
@@ -13,6 +14,7 @@ export function StringInputWithLabel({
   placeholder?: string;
   onChangeValue: (newValue: string) => void;
   isRequired?: boolean;
+  isPassword?: boolean;
 }) {
   return (
     <div className="flex flex-col items-start gap-4 self-stretch">
@@ -24,7 +26,7 @@ export function StringInputWithLabel({
       </div>
       <Input
         placeholder={placeholder}
-        type={"string"}
+        type={isPassword ? "password" : "text"}
         value={value}
         onChange={(e) => onChangeValue(e.target.value)}
         {...props}
