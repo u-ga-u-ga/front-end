@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { SignupForm } from "@/widgets/forms";
+import { EmailSignupForm } from "@/widgets/forms";
 import { SignUpPageHeader } from "@/widgets/headers";
 
 export const Route = createFileRoute("/EmailSignup/")({
@@ -19,7 +19,7 @@ function EmailSignupPage() {
         }}
       />
       <div className="items-strech flex flex-col px-8 py-6">
-        {/* <SignupForm /> */}
+        <EmailSignupForm />
       </div>
     </div>
   );

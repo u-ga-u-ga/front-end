@@ -10,4 +10,6 @@ export {
   NumberInputWithLabel,
   SingleChoice,
   StringInputWithLabel,
+  AddressInput,
+  MobileNumberInput,
 } from "./input";
