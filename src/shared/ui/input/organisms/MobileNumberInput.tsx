@@ -7,14 +7,22 @@ export function MobileNumberInput({
   authNumberValue,
   onChangeMobileNumber,
   onChangeAuthNumber,
+  onSecretCodeRequest,
+  onAuthorizationRequest,
+  hasRequestedSecretCode = false,
+  isAuthorized = false,
   isRequired = false,
   ...props
 }: {
   label: string;
   mobileNumberValue: string;
-  authNumberValue: string;
+  authNumberValue: number | undefined;
   onChangeMobileNumber: (newValue: string) => void;
   onChangeAuthNumber: (newValue: number) => void;
+  onSecretCodeRequest: () => void;
+  onAuthorizationRequest: () => void;
+  isAuthorized: boolean;
+  hasRequestedSecretCode: boolean;
   isRequired?: boolean;
 }) {
   return (
@@ -41,7 +49,19 @@ export function MobileNumberInput({
           onChange={(e) => onChangeAuthNumber(Number(e.target.value))}
           {...props}
         />
-        <Button className="w-36">{"인증하기"}</Button>
+        {isAuthorized ? (
+          <Button className="w-36" disabled>
+            {"인증 완료"}
+          </Button>
+        ) : hasRequestedSecretCode ? (
+          <Button className="w-36" onClick={onAuthorizationRequest}>
+            {"인증 하기"}
+          </Button>
+        ) : (
+          <Button className="w-36" onClick={onSecretCodeRequest}>
+            {"인증 번호 받기"}
+          </Button>
+        )}
       </div>
     </div>
   );

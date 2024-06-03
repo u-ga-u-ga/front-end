@@ -19,7 +19,7 @@ import { Route as IndexImport } from './../pages/index'
 import { Route as CscenterIndexImport } from './../pages/cscenter/index'
 import { Route as SignupIndexImport } from './../pages/Signup/index'
 import { Route as RegisterItemIndexImport } from './../pages/RegisterItem/index'
-import { Route as LoginIndexImport } from './../pages/Login/index'
+import { Route as EmailSignupIndexImport } from './../pages/EmailSignup/index'
 import { Route as ChatListIndexImport } from './../pages/ChatList/index'
 import { Route as CscenterPostIdImport } from './../pages/cscenter/$postId'
 import { Route as AuthAuthImport } from './../pages/_auth/_auth'
@@ -68,8 +68,8 @@ const RegisterItemIndexRoute = RegisterItemIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const LoginIndexRoute = LoginIndexImport.update({
-  path: '/Login/',
+const EmailSignupIndexRoute = EmailSignupIndexImport.update({
+  path: '/EmailSignup/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -134,8 +134,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChatListIndexImport
       parentRoute: typeof rootRoute
     }
-    '/Login/': {
-      preLoaderRoute: typeof LoginIndexImport
+    '/EmailSignup/': {
+      preLoaderRoute: typeof EmailSignupIndexImport
       parentRoute: typeof rootRoute
     }
     '/RegisterItem/': {
@@ -171,7 +171,7 @@ export const routeTree = rootRoute.addChildren([
   LoginRoute,
   AuthAuthRoute.addChildren([AuthAuthMypageRoute]),
   ChatListIndexRoute,
-  LoginIndexRoute,
+  EmailSignupIndexRoute,
   RegisterItemIndexRoute,
   SignupIndexRoute,
   AuthMypageWithdrawalRoute,
