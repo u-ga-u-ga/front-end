@@ -9,7 +9,7 @@ export const Route = createFileRoute("/EmailSignup/")({
 
 function EmailSignupPage() {
   return (
-    <div className="flex w-full flex-1 flex-col gap-6">
+    <div className="flex h-full w-full flex-col gap-6 overflow-auto">
       <SignUpPageHeader
         onClickLeftButton={function (): void {
           throw new Error("Function not implemented.");
