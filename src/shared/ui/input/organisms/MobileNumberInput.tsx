@@ -51,7 +51,7 @@ export function MobileNumberInput({
         />
         {isAuthorized ? (
           <Button className="w-36" disabled>
-            {"인증 완료"}
+            {"(인증 패스)"} // TODO 임시 상태
           </Button>
         ) : hasRequestedSecretCode ? (
           <Button className="w-36" onClick={onAuthorizationRequest}>

@@ -1,4 +1,9 @@
 import { useState } from "react";
+import {
+  Address as DaumAddress,
+  useDaumPostcodePopup,
+} from "react-daum-postcode";
+import axios from "axios";
 import { z } from "zod";
 
 import {
@@ -12,6 +17,8 @@ const emailSchema = z.string().email();
 const passwordSchema = z.string().min(8);
 
 export function EmailSignupForm() {
+  const openDaumPostSearch = useDaumPostcodePopup();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPassowordRepeat] = useState("");
@@ -21,18 +28,24 @@ export function EmailSignupForm() {
   const [mobileNumber, setMobileNumber] = useState("");
   const [authNumber, setAuthNumber] = useState<number | undefined>();
   const [hasRequestedSecretCode, setHasRequestedSecretCode] = useState(false);
-  const [isMobileAuthorized, setIsMobileAuthorized] = useState(false);
+  // const [isMobileAuthorized, setIsMobileAuthorized] = useState(true);
+  const isMobileAuthorized = true; // 임시로 true로 설정
+  const [zipCode, setZipCode] = useState("");
 
-  async function onMobileAuthorizationRequest() {
-    const isInputValid = validateInputForm();
-    if (isInputValid) {
-      // call api here
-      // send authorization request to the server
+  const isFormValid =
+    emailSchema.safeParse(email).success &&
+    passwordSchema.safeParse(password).success &&
+    passwordSchema.safeParse(passwordRepeat).success &&
+    password === passwordRepeat &&
+    name !== "" &&
+    isMobileAuthorized;
 
-      // if success,
-      setIsMobileAuthorized(true);
-    }
+  function onAddressSearchComplete(data: DaumAddress) {
+    setAddressLine1(data.address);
+    setZipCode(data.zonecode);
   }
+
+  async function onMobileAuthorizationRequest() {}
 
   async function onMobileSecretCodeRequest() {
     // call api here
@@ -66,16 +79,28 @@ export function EmailSignupForm() {
     return true;
   }
 
-  function canSubmit() {
-    return (
-      passwordSchema.safeParse(password).success &&
-      passwordSchema.safeParse(passwordRepeat).success &&
-      name !== "" &&
-      isMobileAuthorized
-    );
-  }
+  async function onSubmitSignupAsync() {
+    const isValid = validateInputForm();
+    if (!isValid) return;
 
-  function onSubmitSignup() {}
+    try {
+      axios.request({
+        baseURL: "http://localhost:8080",
+        url: "/user/sign_up",
+        method: "POST",
+        data: {
+          name,
+          email,
+          password,
+          zip_code: zipCode,
+          address: `${addressLine1} ${addressLine2}`,
+          phone_number: mobileNumber,
+        },
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   return (
     <div className="flex w-full flex-col items-stretch gap-9">
@@ -133,11 +158,13 @@ export function EmailSignupForm() {
         label={"주소"}
         addressLine1Value={addressLine1}
         addressLine2Value={addressLine2}
-        onChangeAddressLine1={setAddressLine1}
+        onStartAddressSearch={() => {
+          openDaumPostSearch({ onComplete: onAddressSearchComplete });
+        }}
         onChangeAddressLine2={setAddressLine2}
         isRequired={true}
       />
-      <Button disabled={canSubmit()} onClick={onSubmitSignup}>
+      <Button disabled={!isFormValid} onClick={onSubmitSignupAsync}>
         가입 신청
       </Button>
     </div>
