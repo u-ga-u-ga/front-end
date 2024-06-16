@@ -4,7 +4,7 @@ export function AddressInput({
   label = "주소",
   addressLine1Value,
   addressLine2Value,
-  onChangeAddressLine1,
+  onStartAddressSearch,
   onChangeAddressLine2,
   isRequired = false,
   ...props
@@ -12,7 +12,7 @@ export function AddressInput({
   label: string;
   addressLine1Value: string;
   addressLine2Value: string;
-  onChangeAddressLine1: (newValue: string) => void;
+  onStartAddressSearch: () => void;
   onChangeAddressLine2: (newValue: string) => void;
   isRequired?: boolean;
 }) {
@@ -25,10 +25,10 @@ export function AddressInput({
         )}
       </div>
       <Input
-        placeholder={"주소를 입력해주세요"}
+        placeholder={"눌러서 주소 검색"}
+        onClick={onStartAddressSearch}
         type={"string"}
         value={addressLine1Value}
-        onChange={(e) => onChangeAddressLine1(e.target.value)}
         {...props}
       />
       <Input
